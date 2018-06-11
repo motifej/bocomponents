@@ -1,0 +1,25 @@
+{
+    "name": "bocomponents",
+    "version": "0.0.1",
+    "description": "bo main components library",
+    "main": "build/index.js",
+    "scripts": {
+        "start": "webpack --watch",
+        "build": "webpack",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Esraa",
+    "license": "ISC",
+    "peerDependencies": {
+        "@material-ui/core": "^1.2.0"
+    },
+    "devDependencies": {
+        "@material-ui/core": "^1.2.0",
+        "babel-cli": "^6.24.1",
+        "babel-core": "^6.24.1",
+        "babel-loader": "^7.0.0",
+        "babel-plugin-transform-object-rest-spread": "^6.23.0",
+        "babel-plugin-transform-react-jsx": "^6.24.1",
+        "babel-preset-env": "^1.5.1"
+    }
+}
