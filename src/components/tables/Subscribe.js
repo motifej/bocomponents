@@ -102,6 +102,9 @@ const Subscribe = (Wrapped, config) =>
                     data={this.state.data}
                     page={this.state.page}
                     header={config.resultsHeader}
+                    title={config.title}
+                    order={this.state.order}
+                    orderBy={this.state.orderBy}
                 />
             );
         }

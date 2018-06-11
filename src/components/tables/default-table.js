@@ -1,48 +1,70 @@
 import React from "react";
-import Table from "@material-ui/core/Table";
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
 
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
 import Assignment from "@material-ui/icons/Assignment";
+
 import { withStyles } from "@material-ui/core/styles";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
-import Tooltip from "@material-ui/core/Tooltip";
+
 import GridContainer from "../MUI-Components/Grid/GridContainer.jsx";
 import ItemGrid from "../MUI-Components/Grid/ItemGrid.jsx";
 import tableStyle from "./style";
 import IconCard from "../MUI-Components/Cards/IconCard.jsx";
-import ReactTablePagination from "../Pagination/";
+import ReactTablePagination from "../pagination/";
+import TextField from "../inputs/text-field";
 
-const createSortableColumn = (column, createSortHandler) => {
+const createSortableColumn = (
+    column,
+    orderBy,
+    order,
+    createSortHandler,
+    classes
+) => {
     return (
-        <Tooltip
-            title="Sort"
-            placement={column.numeric ? "bottom-end" : "bottom-start"}
-            enterDelay={300}
+        <TableSortLabel
+            active={column.value === orderBy}
+            direction={order}
+            onClick={id => createSortHandler(column.value)}
+            className={classes.labelSpan}
         >
-            <TableSortLabel
-                active={false}
-                direction={"asc"}
-                onClick={id => createSortHandler(column.value)}
-            >
-                {column.name}
-            </TableSortLabel>
-        </Tooltip>
+            {column.name}
+        </TableSortLabel>
     );
 };
 
-const buildTableHeader = (header, onSortClick, classes) => {
+const buildTableHeader = (header, onSortClick, classes, order, orderBy) => {
     const createSortHandler = (property, event) => {
         onSortClick(event, property);
     };
     return header.map((column, index) => {
+        const cellClass = column.sortable
+            ? classes.tableHeadCell + " " + classes.tableHeadCellSortable
+            : classes.tableHeadCell;
         return (
-            <TableCell key={index} className={classes.tableHeadCell}>
+            <TableCell key={index} className={cellClass}>
                 {column.sortable
-                    ? createSortableColumn(column, createSortHandler)
+                    ? createSortableColumn(
+                          column,
+                          orderBy,
+                          order,
+                          createSortHandler,
+                          classes
+                      )
                     : column.name}
+            </TableCell>
+        );
+    });
+};
+
+const buildTableFilters = (header, classes) => {
+    return header.map((column, index) => {
+        return (
+            <TableCell key={index} className={classes.tableHeadCellFilter}>
+                <TextField disabled={!column.filterable} />
             </TableCell>
         );
     });
@@ -67,6 +89,7 @@ const DefaultTable = props => {
         classes,
         data,
         header,
+        title,
         page,
         onRowClick,
         onSortClick,
@@ -74,7 +97,9 @@ const DefaultTable = props => {
         onNextClick,
         onPreviousClick,
         isNextButtonDisabled,
-        isPreviousButtonDisabled
+        isPreviousButtonDisabled,
+        order,
+        orderBy
     } = props;
     if (header && data) {
         return (
@@ -83,7 +108,7 @@ const DefaultTable = props => {
                     <IconCard
                         icon={Assignment}
                         iconColor="blue"
-                        title="Customer Search Results"
+                        title={title}
                         content={
                             <div>
                                 <ReactTablePagination
@@ -100,11 +125,23 @@ const DefaultTable = props => {
                                     <Table className={classes.table}>
                                         <TableHead className={classes["blue"]}>
                                             <TableRow
-                                                className={classes.tableRow}
+                                                className={classes.tableHeadRow}
                                             >
                                                 {buildTableHeader(
                                                     header,
                                                     onSortClick,
+                                                    classes,
+                                                    order,
+                                                    orderBy
+                                                )}
+                                            </TableRow>
+                                            <TableRow
+                                                className={
+                                                    classes.tableHeadRowFilter
+                                                }
+                                            >
+                                                {buildTableFilters(
+                                                    header,
                                                     classes
                                                 )}
                                             </TableRow>
@@ -128,12 +165,12 @@ const DefaultTable = props => {
         );
     } else {
         return (
-            <GridContainer className={classes.tableResponsive}>
+            <GridContainer>
                 <ItemGrid xs={12}>
                     <IconCard
                         icon={Assignment}
                         iconColor="blue"
-                        title="Customer Search Results"
+                        title={title || "Results"}
                         content={
                             <div className={classes.noResults}>No Results</div>
                         }
