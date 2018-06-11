@@ -28,6 +28,12 @@ module.exports = {
         React: "react"
     },
     resolve: {
+        alias: {
+            "inputs/TextField": path.resolve(
+                __dirname,
+                "src/components/inputs/text-field.js"
+            )
+        },
         extensions: [".js", ".jsx"]
     }
 };

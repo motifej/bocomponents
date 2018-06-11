@@ -7,15 +7,15 @@ import ItemGrid from "../MUI-Components/Grid/ItemGrid";
 import Button from "../MUI-Components/CustomButtons/Button.jsx";
 import HeaderCard from "../MUI-Components/Cards/HeaderCard";
 
-import { generateInputs } from "./utils";
+import { createInputs } from "./utils";
 import formStyle from "./style.jsx";
 
 const Form = props => {
-    const { name, onSubmit, inputs, classes } = props;
+    const { name, onSubmit, inputsConfig, classes } = props;
     return (
         <form name={name} onSubmit={onSubmit}>
             <GridContainer>
-                {generateInputs(inputs, classes)}
+                {createInputs(inputsConfig, classes)}
                 <div className={classes.buttonWrapper}>
                     <Button color="info">Reset Form</Button>
                     <Button color="success" onClick={onSubmit}>
@@ -33,7 +33,7 @@ const FormTemplate = props => {
         <Form
             name={config.name}
             onSubmit={onSubmit}
-            inputs={config.formInputs}
+            inputsConfig={config.formInputs}
             classes={classes}
         />
     );
