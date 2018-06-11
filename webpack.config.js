@@ -1,4 +1,4 @@
-const path = required("path");
+const path = require("path");
 const BUILD = path.resolve(__dirname, "build");
 const SRC = path.resolve(__dirname, "src");
 
@@ -12,17 +12,22 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test: /\.jsx?$/,
                 include: SRC,
                 exclude: /(node_modules|bower_components|build)/,
-                use: {
-                    loader: "babel-loader"
-                }
+                loader: "babel-loader"
+            },
+
+            {
+                test: /\.json$/,
+                use: "json-loader"
             }
         ]
     },
     externals: {
-        react: "commonjs react",
-        "react-dom": "ReactDom"
+        React: "react"
+    },
+    resolve: {
+        extensions: [".js", ".jsx"]
     }
 };
