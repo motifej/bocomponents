@@ -1,6 +1,6 @@
 {
     "name": "bocomponents",
-    "version": "0.0.1",
+    "version": "1.0.2",
     "description": "bo main components library",
     "main": "build/index.js",
     "scripts": {
@@ -15,11 +15,20 @@
     },
     "devDependencies": {
         "@material-ui/core": "^1.2.0",
+        "@material-ui/icons": "^1.1.0",
         "babel-cli": "^6.24.1",
         "babel-core": "^6.24.1",
         "babel-loader": "^7.0.0",
+        "babel-plugin-transform-class-properties": "^6.24.1",
         "babel-plugin-transform-object-rest-spread": "^6.23.0",
         "babel-plugin-transform-react-jsx": "^6.24.1",
-        "babel-preset-env": "^1.5.1"
-    }
+        "babel-preset-env": "^1.5.1",
+        "babel-preset-react": "^6.24.1",
+        "react": "^16.4.0",
+        "react-dom": "^16.4.0",
+        "react-redux": "^5.0.7",
+        "redux": "^4.0.0",
+        "redux-form": "^7.3.0"
+    },
+    "dependencies": {}
 }
