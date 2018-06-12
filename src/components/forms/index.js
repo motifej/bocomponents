@@ -8,7 +8,7 @@ import Button from "../MUI-Components/CustomButtons/Button.jsx";
 import HeaderCard from "../MUI-Components/Cards/HeaderCard";
 
 import { createInputs } from "./utils";
-import formStyle from "./style.jsx";
+import formStyle from "./style.js";
 
 const Form = props => {
     const { name, onSubmit, inputsConfig, classes } = props;
