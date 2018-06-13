@@ -8,7 +8,7 @@ const customSelectStyle = {
         padding: "4px 0 7px",
         lineHeight: "30px !important",
         margin: "0 0 4px 0 !important",
-        fontSize:"14px !important",
+        fontSize: "14px !important",
         "&:focus": {
             backgroundColor: "transparent"
         },
@@ -18,24 +18,6 @@ const customSelectStyle = {
         "& + input + svg": {
             transition: "all 300ms linear"
         }
-    },
-    selectFormControl: {
-        "& > div": {
-            "&:before": {
-                height: "1px !important",
-                borderBottomColor:"rgba(0, 0, 0, 0.42) !important"
-
-            },
-            "&:after": {
-                backgroundColor: primaryColor
-            }
-        }
-    },
-    selectLabel: {
-        fontSize: "12px",
-        textTransform: "uppercase",
-        color: "#999999",
-        top: "0px"
     },
     selectMenu: {
         "& > div": {

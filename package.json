@@ -1,6 +1,6 @@
 {
     "name": "bocomponents",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "bo main components library",
     "main": "build/index.js",
     "scripts": {
@@ -17,8 +17,8 @@
         "@material-ui/core": "^1.2.0",
         "@material-ui/icons": "^1.1.0",
         "babel-cli": "^6.24.1",
-        "babel-core": "^6.24.1",
-        "babel-loader": "^7.0.0",
+        "babel-core": "^6.26.3",
+        "babel-loader": "^7.1.4",
         "babel-plugin-transform-class-properties": "^6.24.1",
         "babel-plugin-transform-object-rest-spread": "^6.23.0",
         "babel-plugin-transform-react-jsx": "^6.24.1",
