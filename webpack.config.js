@@ -17,7 +17,10 @@ module.exports = {
                 exclude: /(node_modules|bower_components|build)/,
                 loader: "babel-loader"
             },
-
+            {
+                test: /\.css$/,
+                use: ["style-loader", "css-loader"]
+            },
             {
                 test: /\.json$/,
                 use: "json-loader"
