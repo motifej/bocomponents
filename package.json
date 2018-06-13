@@ -1,6 +1,6 @@
 {
     "name": "bocomponents",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "bo main components library",
     "main": "build/index.js",
     "scripts": {
