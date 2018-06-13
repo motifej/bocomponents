@@ -1,7 +1,28 @@
 import customCheckboxRadioSwitch from "../styles/customCheckboxRadioSwitch.jsx";
 import customSelectStyle from "../styles/customSelectStyle.jsx";
+import { primaryColor } from "../material-dashboard-pro-react.jsx";
 
-const userSearchFormStyle = {
+export const formControlStyle = {
+    selectFormControl: {
+        "& > div": {
+            "&:before": {
+                height: "1px !important",
+                borderBottomColor: "rgba(0, 0, 0, 0.42) !important"
+            },
+            "&:after": {
+                backgroundColor: primaryColor
+            }
+        }
+    },
+    selectLabel: {
+        fontSize: "12px",
+        textTransform: "uppercase",
+        color: "#999999",
+        top: "0px"
+    }
+};
+
+const defaultFormStyle = {
     buttonWrapper: {
         margin: "0 auto"
     },
@@ -35,11 +56,11 @@ const userSearchFormStyle = {
         color: "red"
     },
     dateInput: {
-        width:"100%",
+        width: "100%",
         "& label": { top: "5px" }
     },
     ...customCheckboxRadioSwitch,
     ...customSelectStyle
 };
 
-export default userSearchFormStyle;
+export default defaultFormStyle;
