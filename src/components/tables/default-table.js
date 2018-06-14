@@ -70,19 +70,24 @@ const buildTableFilters = (header, classes) => {
     });
 };
 
-const buildTableRow = (row, onRowClick, classes) => (
-    <TableRow
-        className={classes.tableDataRow}
-        onClick={id => onRowClick(row.id)}
-        key={row.id}
-    >
-        {Object.keys(row).map((key, index) => (
-            <TableCell key={index} className={classes.tableDataCell}>
-                {row[key]}
-            </TableCell>
-        ))}
-    </TableRow>
-);
+const buildTableRow = (row, onRowClick, classes, decoder) => {
+    console.log("docded", decoder);
+    return (
+        <TableRow
+            className={classes.tableDataRow}
+            onClick={id => onRowClick(row.id)}
+            key={row.id}
+        >
+            {Object.keys(row).map((key, index) => {
+                return (
+                    <TableCell key={index} className={classes.tableDataCell}>
+                        {decoder(key, row[key])}
+                    </TableCell>
+                );
+            })}
+        </TableRow>
+    );
+};
 
 const DefaultTable = props => {
     const {
@@ -99,7 +104,8 @@ const DefaultTable = props => {
         isNextButtonDisabled,
         isPreviousButtonDisabled,
         order,
-        orderBy
+        orderBy,
+        decoder
     } = props;
     if (header && data) {
         return (
@@ -151,7 +157,8 @@ const DefaultTable = props => {
                                                 return buildTableRow(
                                                     row,
                                                     onRowClick,
-                                                    classes
+                                                    classes,
+                                                    decoder
                                                 );
                                             })}
                                         </TableBody>

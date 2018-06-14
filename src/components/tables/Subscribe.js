@@ -1,6 +1,21 @@
 import React from "react";
 import pick from "lodash/pick";
 import { buildQuery } from "./utils";
+import enJson from "../../en.json";
+const coded = ["country_iso"];
+const time = ["timestamp", "time_stamp"];
+const isCoded = key => coded.includes(key);
+const isTime = key => time.includes(key);
+const getTime = timestamp => {
+    console.log("timestamp", timestamp);
+    return `${new Date(timestamp).toDateString()} ${new Date(
+        timestamp
+    ).toLocaleTimeString()}`;
+};
+const T = token => {
+    console.log("token", token);
+    return enJson[token];
+};
 
 const Subscribe = (Wrapped, config) =>
     class extends React.Component {
@@ -19,6 +34,11 @@ const Subscribe = (Wrapped, config) =>
                 endPoint: config.endPoint
             };
         }
+        decoder = (key, value) => {
+            if (isCoded(key)) return T(`${key}.${value}`);
+            if (isTime(key)) return getTime(value);
+            return value;
+        };
         setData = data => {
             this.setState({ data, loading: false });
         };
@@ -94,6 +114,7 @@ const Subscribe = (Wrapped, config) =>
                 this.fetchData();
             }
         }
+
         componentDidMount() {
             this.getTotalPages();
             this.fetchData();
@@ -103,6 +124,7 @@ const Subscribe = (Wrapped, config) =>
                 <Wrapped
                     {...this.props}
                     totalPages={this.state.totalPages}
+                    decoder={this.decoder}
                     onNextClick={this.nextPage}
                     onPreviousClick={this.previousPage}
                     onRowClick={config.onRowClick}
