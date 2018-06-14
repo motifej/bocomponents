@@ -28,47 +28,36 @@ const createMenuItems = (options, classes) => {
     });
 };
 
-const createLabelItemGrid = (input, classes) => {
+const createField = (input, classes, index) => {
+    console.log("input", input);
     return (
-        <ItemGrid
-            xs={(input.grid && input.grid.label.xs) || 12}
-            sm={(input.grid && input.grid.label.sm) || 2}
+        <Field
+            className={setStyle(input.type, classes)}
+            key={index}
+            component={Inputs[input.type]}
+            format={value => setFormat(value, input.multiple)}
+            {...input}
+            validate={input.validate}
         >
-            <FormLabel className={classes.formLabel}>{input.label}</FormLabel>
-        </ItemGrid>
+            {input.type === "select"
+                ? createMenuItems(input.options, classes)
+                : null}
+        </Field>
     );
 };
-
-const createField = (input, classes, index) => (
-    <Field
-        className={setStyle(input.type, classes)}
-        key={index}
-        name={input.name}
-        type={input.type}
-        component={Inputs[input.type]}
-        placeholder={input.placeholder}
-        format={value => setFormat(value, input.multiple)}
-        multiple={input.multiple}
-    >
-        {input.type === "select"
-            ? createMenuItems(input.options, classes)
-            : null}
-    </Field>
-);
 
 const createInput = (input, index, classes) => {
     const field = createField(input, classes, index);
     return (
         <React.Fragment key={index}>
-            {createLabelItemGrid(input, classes)}
             <ItemGrid
                 xs={(input.grid && input.grid.field.xs) || 12}
-                sm={(input.grid && input.grid.field.sm) || 9}
+                sm={(input.grid && input.grid.field.sm) || 12}
             >
                 {input.type === "select"
                     ? wrrapWithFormControl(field)
                     : input.type === "checkbox"
-                        ? wrrapWithFormControlLabel(field, input.checkboxLabel)
+                        ? wrrapWithFormControlLabel(field, input.label)
                         : field}
             </ItemGrid>
         </React.Fragment>
