@@ -4,7 +4,7 @@ import Button from "../MUI-Components/CustomButtons/Button.jsx";
 import { inputsGenerator } from "./utils";
 
 const DefaultForm = props => {
-    const { name, onSubmit, inputsConfig, classes, reset } = props;
+    const { name, onSubmit, inputsConfig, classes, reset, invalid } = props;
     return (
         <form name={name} onSubmit={onSubmit}>
             <GridContainer>
@@ -13,7 +13,11 @@ const DefaultForm = props => {
                     <Button color="info" onClick={reset}>
                         Reset Form
                     </Button>
-                    <Button color="success" onClick={onSubmit}>
+                    <Button
+                        color="success"
+                        onClick={onSubmit}
+                        disabled={invalid}
+                    >
                         Send
                     </Button>
                 </div>
