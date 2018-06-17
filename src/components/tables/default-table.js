@@ -114,7 +114,7 @@ const DefaultTable = props => {
                     <IconCard
                         icon={Assignment}
                         iconColor="blue"
-                        title={title}
+                        title={title || "Results"}
                         content={
                             <div>
                                 <ReactTablePagination
