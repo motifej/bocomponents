@@ -7,7 +7,7 @@ import Inputs from "./form-inputs";
 import {
     setStyle,
     setFormat,
-    wrrapWithFormControl,
+    wrapWithFormControl,
     wrrapWithFormControlLabel
 } from "./helpers";
 
@@ -29,15 +29,14 @@ const createMenuItems = (options, classes) => {
 };
 
 const createField = (input, classes, index) => {
-    console.log("input", input);
     return (
         <Field
             className={setStyle(input.type, classes)}
             key={index}
             component={Inputs[input.type]}
             format={value => setFormat(value, input.multiple)}
-            {...input}
             validate={input.validate}
+            {...input}
         >
             {input.type === "select"
                 ? createMenuItems(input.options, classes)
@@ -55,7 +54,7 @@ const createInput = (input, index, classes) => {
                 sm={(input.grid && input.grid.field.sm) || 12}
             >
                 {input.type === "select"
-                    ? wrrapWithFormControl(field)
+                    ? wrapWithFormControl(field)
                     : input.type === "checkbox"
                         ? wrrapWithFormControlLabel(field, input.label)
                         : field}
