@@ -37,9 +37,6 @@ const renderDatePicker = ({
             dateForm="MM/DD/YYYY"
             placeholderText={placeholder}
             selected={input.value ? moment(input.value, "MM/DD/YYYY") : null}
-            showTimeSelect={true}
-            timeFormat="HH:mm"
-            timeCaption="time"
         />
         {touched && error && <span>{error}</span>}
     </div>
