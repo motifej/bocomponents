@@ -5,10 +5,6 @@ import {
 
 const customSelectStyle = {
     select: {
-        padding: "4px 0 7px",
-        lineHeight: "30px !important",
-        margin: "0 0 4px 0 !important",
-        fontSize: "14px !important",
         "&:focus": {
             backgroundColor: "transparent"
         },
