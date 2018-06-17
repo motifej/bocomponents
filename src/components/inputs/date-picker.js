@@ -2,7 +2,20 @@ import React from "react";
 import DatePicker from "react-datepicker";
 import moment from "moment";
 
-import "react-datepicker/dist/react-datepicker.css";
+import "../styles/react-datepicker.css";
+
+const style = {
+    container: {
+        padding: "15px 0 0 0",
+        display: "flex",
+        flexDirection: "row"
+    },
+    label: {
+        color: "rgba(0, 0, 0, 0.54)",
+        fontSize: "14px",
+        padding: "10px 10px 0 0"
+    }
+};
 
 const renderDatePicker = ({
     input,
@@ -11,13 +24,22 @@ const renderDatePicker = ({
     defaultValue,
     meta: { touched, error }
 }) => (
-    <div>
-        <label htmlFor={input.name}>{label}</label>
+    <div style={style.container}>
+        {label ? (
+            <label htmlFor={input.name} style={style.label}>
+                {label}
+            </label>
+        ) : (
+            <div />
+        )}
         <DatePicker
             {...input}
             dateForm="MM/DD/YYYY"
             placeholderText={placeholder}
             selected={input.value ? moment(input.value, "MM/DD/YYYY") : null}
+            showTimeSelect={true}
+            timeFormat="HH:mm"
+            timeCaption="time"
         />
         {touched && error && <span>{error}</span>}
     </div>
