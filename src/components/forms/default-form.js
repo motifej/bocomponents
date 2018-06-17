@@ -10,13 +10,18 @@ const DefaultForm = props => {
             <GridContainer>
                 {inputsGenerator(inputsConfig, classes)}
                 <div className={classes.buttonWrapper}>
-                    <Button color="info" onClick={reset}>
+                    <Button
+                        color="info"
+                        onClick={reset}
+                        customClass={classes.formButton}
+                    >
                         Reset Form
                     </Button>
                     <Button
                         color="success"
                         onClick={onSubmit}
                         disabled={invalid}
+                        customClass={classes.formButton}
                     >
                         Send
                     </Button>

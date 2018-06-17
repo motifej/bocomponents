@@ -23,7 +23,14 @@ export const formControlStyle = {
 
 const defaultFormStyle = {
     buttonWrapper: {
-        margin: "0 auto"
+        display: "flex",
+        justifyContent: "flex-end",
+        padding: "15px 0",
+        width: "100%"
+    },
+    formButton: {
+        display: "inline-flex",
+        margin: "15px"
     },
     input: {
         padding: "0",
