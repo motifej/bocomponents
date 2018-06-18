@@ -12,6 +12,7 @@ const getTime = timestamp => {
     ).toLocaleTimeString()}`;
 };
 const T = token => {
+    console.log("token", token);
     return enJson[token];
 };
 

@@ -28,6 +28,11 @@ const subscribeSort = Wrapped =>
                 page: 0
             });
         };
+        componentDidUpdate(prevProps, prevState, snapshot) {
+            if (prevState.sortQuery != this.state.sortQuery) {
+                // fetch data
+            }
+        }
 
         render() {
             return (
