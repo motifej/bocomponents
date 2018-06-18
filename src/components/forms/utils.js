@@ -36,8 +36,8 @@ const createField = (input, classes, index) => {
             key={index}
             component={Inputs[input.type]}
             format={value => setFormat(value, input.multiple)}
-            {...input}
             validate={input.validate}
+            {...input}
         >
             {input.type === "select"
                 ? createMenuItems(input.options, classes)
