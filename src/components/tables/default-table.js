@@ -71,7 +71,6 @@ const buildTableFilters = (header, classes) => {
 };
 
 const buildTableRow = (row, onRowClick, classes, decoder) => {
-    console.log("docded", decoder);
     return (
         <TableRow
             className={classes.tableDataRow}
@@ -90,6 +89,7 @@ const buildTableRow = (row, onRowClick, classes, decoder) => {
 };
 
 const DefaultTable = props => {
+    const defaultTitle = "Results";
     const {
         classes,
         data,
@@ -114,7 +114,7 @@ const DefaultTable = props => {
                     <IconCard
                         icon={Assignment}
                         iconColor="blue"
-                        title={title || "Results"}
+                        title={title || defaultTitle}
                         content={
                             <div>
                                 <ReactTablePagination
@@ -177,7 +177,7 @@ const DefaultTable = props => {
                     <IconCard
                         icon={Assignment}
                         iconColor="blue"
-                        title={title || "Results"}
+                        title={title || defaultTitle}
                         content={
                             <div className={classes.noResults}>No Results</div>
                         }
