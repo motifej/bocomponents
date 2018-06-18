@@ -25,7 +25,7 @@ const Subscribe = (Wrapped, config) =>
                 data: [],
                 loading: true,
                 page: 0,
-                totalPages: 5,
+                totalPages: 0,
                 order: "asc",
                 orderBy: "",
                 sortQuery: "",
@@ -59,8 +59,8 @@ const Subscribe = (Wrapped, config) =>
         };
         fetchData = (
             URL = this.createUrl(),
-            headerConfig = config.resultsHeader,
-            cb = this.pickData
+            cb = this.pickData,
+            headerConfig = config.resultsHeader
         ) => {
             fetch(URL)
                 .then(function(response) {
@@ -93,6 +93,16 @@ const Subscribe = (Wrapped, config) =>
         previousPage = () => {
             this.setState({ page: this.state.page - 1 });
         };
+        setTotalPages = result => {
+            const totalPages = Math.ceil(result[0]["count(*)"] / 50);
+            this.setState({ totalPages });
+        };
+        getTotalPages = () => {
+            const url = `${this.state.domain}${this.state.endPoint}?${
+                this.state.query
+            }&p_count`;
+            this.fetchData(url, this.setTotalPages);
+        };
         componentDidUpdate(prevProps, prevState, snapshot) {
             //page navigation
             if (prevState.page != this.state.page) {
@@ -100,11 +110,13 @@ const Subscribe = (Wrapped, config) =>
             }
             //sort navigation
             if (prevState.sortQuery != this.state.sortQuery) {
+                this.getTotalPages();
                 this.fetchData();
             }
         }
 
         componentDidMount() {
+            this.getTotalPages();
             this.fetchData();
         }
         render() {
