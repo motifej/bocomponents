@@ -18,11 +18,12 @@ export const wrrapWithFormControlLabel = (component, label) => (
     <FormControlLabel control={component} label={label} />
 );
 
-export const wrrapWithFormControl = component => {
+export const wrapWithFormControl = component => {
+    const { label } = component.props;
     return (
-        <FormControl fullWidth className={formControlStyle.selectFormControl}>
-            <InputLabel className={formControlStyle.selectLabel}>
-                {"Select.."}
+        <FormControl fullWidth style={formControlStyle.selectFormControl}>
+            <InputLabel style={formControlStyle.selectLabel}>
+                {"Select " + label}
             </InputLabel>
             {component}
         </FormControl>
