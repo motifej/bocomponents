@@ -74,6 +74,9 @@ const tableStyle = theme => ({
         background: "#FFF",
         "& input": {
             width: "100%"
+        },
+        "& > div": {
+            width: "100%"
         }
     },
     tableDataCell: {

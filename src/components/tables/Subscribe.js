@@ -7,7 +7,6 @@ const time = ["timestamp", "time_stamp"];
 const isCoded = key => coded.includes(key);
 const isTime = key => time.includes(key);
 const getTime = timestamp => {
-    console.log("timestamp", timestamp);
     return `${new Date(timestamp).toDateString()} ${new Date(
         timestamp
     ).toLocaleTimeString()}`;
