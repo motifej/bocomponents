@@ -1,20 +1,9 @@
 import React from "react";
+import axios from "axios";
 import pick from "lodash/pick";
 import { buildQuery } from "./utils";
-import enJson from "../../en.json";
-const coded = ["country_iso"];
-const time = ["timestamp", "time_stamp"];
-const isCoded = key => coded.includes(key);
-const isTime = key => time.includes(key);
-const getTime = timestamp => {
-    return `${new Date(timestamp).toDateString()} ${new Date(
-        timestamp
-    ).toLocaleTimeString()}`;
-};
-const T = token => {
-    console.log("token", token);
-    return enJson[token];
-};
+import decoder from "./decoder";
+import { requestData, fixData } from "./fetch-data";
 
 const Subscribe = (Wrapped, config) =>
     class extends React.Component {
@@ -28,17 +17,13 @@ const Subscribe = (Wrapped, config) =>
                 order: "asc",
                 orderBy: "",
                 sortQuery: "",
+                pagination: true,
                 query: buildQuery(config.query),
                 domain: config.domain,
                 endPoint: config.endPoint
             };
         }
-        decoder = (key, value) => {
-            if (isCoded(key)) return T(`${key}.${value}`);
-            if (isTime(key)) return getTime(value);
-            return value;
-        };
-        setData = data => {
+        updateState = data => {
             this.setState({ data, loading: false });
         };
         pickData = (results, headerConfig, cb = this.setData) => {
@@ -86,12 +71,6 @@ const Subscribe = (Wrapped, config) =>
                 page: 0
             });
         };
-        nextPage = () => {
-            this.setState({ page: this.state.page + 1 });
-        };
-        previousPage = () => {
-            this.setState({ page: this.state.page - 1 });
-        };
         setTotalPages = result => {
             const totalPages = Math.ceil(result[0]["count(*)"] / 50);
             this.setState({ totalPages });
@@ -102,28 +81,35 @@ const Subscribe = (Wrapped, config) =>
             }&p_count`;
             this.fetchData(url, this.setTotalPages);
         };
+        request = async (url = this.createUrl()) => {
+            const axiosRequest = await requestData(url);
+            const fixed = await fixData(
+                axiosRequest.data.result,
+                config.resultsHeader
+            );
+            return this.updateState(fixed);
+        };
         componentDidUpdate(prevProps, prevState, snapshot) {
             //page navigation
             if (prevState.page != this.state.page) {
-                this.fetchData();
+                this.request();
             }
             //sort navigation
             if (prevState.sortQuery != this.state.sortQuery) {
                 this.getTotalPages();
-                this.fetchData();
+                this.request();
             }
         }
 
         componentDidMount() {
-            this.getTotalPages();
-            this.fetchData();
+            this.request();
         }
         render() {
             return (
                 <Wrapped
                     {...this.props}
                     totalPages={this.state.totalPages}
-                    decoder={this.decoder}
+                    pagination={this.state.pagination}
                     onNextClick={this.nextPage}
                     onPreviousClick={this.previousPage}
                     onRowClick={config.onRowClick}
@@ -138,6 +124,7 @@ const Subscribe = (Wrapped, config) =>
                     title={config.title}
                     order={this.state.order}
                     orderBy={this.state.orderBy}
+                    decoder={decoder}
                 />
             );
         }

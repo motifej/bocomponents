@@ -9,3 +9,13 @@ export const buildQuery = values => {
     }
     return query;
 };
+
+export const createUrl = () => {
+    return this.state.sortQuery
+        ? `${this.state.domain}${this.state.endPoint}?page=${this.state.page}&${
+              this.state.query
+          }sort=${this.state.sortQuery}`
+        : `${this.state.domain}${this.state.endPoint}?page=${this.state.page}&${
+              this.state.query
+          }`;
+};

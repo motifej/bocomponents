@@ -105,7 +105,8 @@ const DefaultTable = props => {
         isPreviousButtonDisabled,
         order,
         orderBy,
-        decoder
+        decoder,
+        pagination
     } = props;
     if (header && data) {
         return (
@@ -117,16 +118,20 @@ const DefaultTable = props => {
                         title={title || defaultTitle}
                         content={
                             <div>
-                                <ReactTablePagination
-                                    page={page}
-                                    totalPages={totalPages}
-                                    onNextClick={onNextClick}
-                                    onPreviousClick={onPreviousClick}
-                                    isNextButtonDisabled={isNextButtonDisabled}
-                                    isPreviousButtonDisabled={
-                                        isPreviousButtonDisabled
-                                    }
-                                />
+                                {pagination ? (
+                                    <ReactTablePagination
+                                        page={page}
+                                        totalPages={totalPages}
+                                        onNextClick={onNextClick}
+                                        onPreviousClick={onPreviousClick}
+                                        isNextButtonDisabled={
+                                            isNextButtonDisabled
+                                        }
+                                        isPreviousButtonDisabled={
+                                            isPreviousButtonDisabled
+                                        }
+                                    />
+                                ) : null}
                                 <div className={classes.tableContainer}>
                                     <Table className={classes.table}>
                                         <TableHead className={classes["blue"]}>

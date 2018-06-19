@@ -1,3 +1,6 @@
+require("babel-core/register");
+require("babel-polyfill");
+
 export { default as SelectField } from "./components/inputs/select-field";
 export { default as Checkbox } from "./components/inputs/checkbox";
 export { default as TextField } from "./components/inputs/text-field";
