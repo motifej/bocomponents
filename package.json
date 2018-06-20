@@ -2,7 +2,7 @@
     "name": "bocomponents",
     "version": "1.1.0",
     "description": "bo main components library",
-    "main": "build/index.js",
+    "main": "build/index",
     "scripts": {
         "start": "webpack --watch",
         "build": "webpack",
@@ -26,6 +26,7 @@
         "babel-polyfill": "^6.26.0",
         "babel-preset-env": "^1.5.1",
         "babel-preset-react": "^6.24.1",
+        "babel-regenerator-runtime": "^6.5.0",
         "css-loader": "^0.28.11",
         "react": "^16.4.0",
         "react-dom": "^16.4.0",
@@ -35,6 +36,7 @@
         "style-loader": "^0.21.0"
     },
     "dependencies": {
+        "@types/babel-core": "^6.25.5",
         "axios": "^0.18.0",
         "json-loader": "^0.5.7",
         "moment": "^2.22.2",

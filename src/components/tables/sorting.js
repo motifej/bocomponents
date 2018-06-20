@@ -30,7 +30,8 @@ const subscribeSort = Wrapped =>
         };
         componentDidUpdate(prevProps, prevState, snapshot) {
             if (prevState.sortQuery != this.state.sortQuery) {
-                // fetch data
+                this.getTotalPages();
+                this.request();
             }
         }
 
@@ -47,3 +48,20 @@ const subscribeSort = Wrapped =>
     };
 
 export default subscribeSort;
+
+// updateSortState = (orderBy, order, sortQuery) => {
+//     this.setState({
+//         orderBy,
+//         order,
+//         sortQuery,
+//         page: 0
+//     });
+// };
+// handleRequestSort = (event, property, cb = this.updateSortState) => {
+//     const [orderBy, order, sortQuery] = handleSort(
+//         property,
+//         this.state.orderBy,
+//         this.state.order
+//     );
+//     cb(orderBy, order, sortQuery);
+// };

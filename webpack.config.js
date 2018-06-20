@@ -3,19 +3,20 @@ const BUILD = path.resolve(__dirname, "build");
 const SRC = path.resolve(__dirname, "src");
 
 module.exports = {
-    entry: "./src/index.js",
+    entry: ["babel-polyfill", "./src/index.js"],
     output: {
         path: BUILD,
         filename: "index.js",
         libraryTarget: "commonjs2"
     },
+    devtool: "inline-source-map",
     module: {
         rules: [
             {
                 test: /\.jsx?$/,
+                loader: "babel-loader",
                 include: SRC,
-                exclude: /(node_modules|bower_components|build)/,
-                loader: "babel-loader"
+                exclude: /(node_modules|bower_components|build)/
             },
             {
                 test: /\.css$/,

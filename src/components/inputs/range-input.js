@@ -1,11 +1,12 @@
 import React from "react";
 import InputRange from "react-input-range";
+
 import "react-input-range/lib/css/index.css";
+
 const RenderInputRange = ({
     input: { onChange, ...inputParams },
     ...params
 }) => {
-    console.log("...", ...params);
     return (
         <InputRange
             draggableTrack

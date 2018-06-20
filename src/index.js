@@ -1,5 +1,5 @@
-require("babel-core/register");
-require("babel-polyfill");
+import "babel-core/register";
+import "babel-polyfill";
 
 export { default as SelectField } from "./components/inputs/select-field";
 export { default as Checkbox } from "./components/inputs/checkbox";
@@ -10,3 +10,4 @@ export { default as Switch } from "./components/inputs/switch";
 export { default as FormTemplate } from "./components/forms/";
 
 export { BuildDefaultTable } from "./components/tables/";
+export { default as ReactTablePagination } from "./components/pagination";

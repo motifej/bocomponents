@@ -10,11 +10,9 @@ const getTime = timestamp => {
         timestamp
     ).toLocaleTimeString()}`;
 };
-
 const T = token => {
     return enJson[token];
 };
-
 const decoder = (key, value) => {
     if (isCoded(key)) return T(`${key}.${value}`);
     if (isTime(key)) return getTime(value);
