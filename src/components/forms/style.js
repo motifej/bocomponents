@@ -4,20 +4,25 @@ import { primaryColor } from "../material-dashboard-pro-react.jsx";
 
 export const formControlStyle = {
     selectFormControl: {
-        "& > div": {
-            "&:before": {
-                height: "1px !important",
-                borderBottomColor: "rgba(0, 0, 0, 0.42) !important"
-            },
-            "&:after": {
-                backgroundColor: primaryColor
-            }
-        }
+        height: "50px"
     },
     selectLabel: {
         fontSize: "12px",
         textTransform: "uppercase",
         top: "6px"
+    },
+    rangeFormControl: {
+        height: "50px",
+        margin:"10px 0 5px 0",
+        flexDirection: "column",
+        justifyContent: "center"
+    },
+    rangeLabel: {
+        transform:"none",
+        color: "rgba(0, 0, 0, 0.54)",
+        left: "50%",
+        top:"auto",
+        bottom:"0"
     }
 };
 
