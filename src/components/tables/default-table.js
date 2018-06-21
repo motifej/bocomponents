@@ -54,9 +54,6 @@ const DefaultTable = props => {
         orderBy
     );
     const tableFilters = buildTableFilters(header, classes);
-    const Pagin = () => (
-        <Pagination request={request} requestPageCount={requestPagesCount} />
-    );
     const tableBody =
         data && createTableBody(data, onRowClick, classes, decoder);
     console.log("data", data);

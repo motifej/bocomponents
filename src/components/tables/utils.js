@@ -18,11 +18,11 @@ export const buildQuery = values => {
 };
 
 export const createUrl = () => {
-    return this.state.sortQuery
-        ? `${this.state.domain}${this.state.endPoint}?page=${this.state.page}&${
+    return this.state.sortQuery ?
+        `${this.state.domain}${this.state.endPoint}?page=${this.state.page}&${
               this.state.query
-          }sort=${this.state.sortQuery}`
-        : `${this.state.domain}${this.state.endPoint}?page=${this.state.page}&${
+          }sort=${this.state.sortQuery}` :
+        `${this.state.domain}${this.state.endPoint}?page=${this.state.page}&${
               this.state.query
           }`;
 };
@@ -34,33 +34,50 @@ export const handleSort = (property, stateOrderBy, stateOrder) => {
         order = "asc";
     }
     const sortQuery = order === "desc" ? `-${orderBy}` : `${orderBy}`;
-    return [orderBy, order, sortQuery];
+    return {
+        orderBy,
+        order,
+        sortQuery
+    };
 };
 
 export const buildTableRow = (row, onRowClick, classes, decoder) => {
-    return (
-        <TableRow
-            className={classes.tableDataRow}
-            onClick={id => onRowClick(row.id)}
-            key={row.id}
-        >
-            {Object.keys(row).map((key, index) => {
-                return (
-                    <TableCell key={index} className={classes.tableDataCell}>
-                        {decoder(key, row[key])}
-                    </TableCell>
+    return ( <
+        TableRow className = {
+            classes.tableDataRow
+        }
+        onClick = {
+            id => onRowClick(row.id)
+        }
+        key = {
+            row.id
+        } >
+        {
+            Object.keys(row).map((key, index) => {
+                return ( <
+                    TableCell key = {
+                        index
+                    }
+                    className = {
+                        classes.tableDataCell
+                    } > {
+                        decoder(key, row[key])
+                    } <
+                    /TableCell>
                 );
-            })}
-        </TableRow>
+            })
+        } <
+        /TableRow>
     );
 };
 
-export const createTableBody = (data, onRowClick, classes, decoder) => (
-    <TableBody>
-        {data.map(row => {
+export const createTableBody = (data, onRowClick, classes, decoder) => ( <
+    TableBody > {
+        data.map(row => {
             return buildTableRow(row, onRowClick, classes, decoder);
-        })}
-    </TableBody>
+        })
+    } <
+    /TableBody>
 );
 
 export const createSortableColumn = (
@@ -70,24 +87,40 @@ export const createSortableColumn = (
     createSortHandler,
     classes
 ) => {
-    return (
-        <TableSortLabel
-            active={column.value === orderBy}
-            direction={order}
-            onClick={id => createSortHandler(column.value)}
-            className={classes.labelSpan}
-        >
-            {column.name}
-        </TableSortLabel>
+    return ( <
+        TableSortLabel active = {
+            column.value === orderBy
+        }
+        direction = {
+            order
+        }
+        onClick = {
+            id => createSortHandler(column.value)
+        }
+        className = {
+            classes.labelSpan
+        } >
+        {
+            column.name
+        } <
+        /TableSortLabel>
     );
 };
 
 export const buildTableFilters = (header, classes) => {
     return header.map((column, index) => {
-        return (
-            <TableCell key={index} className={classes.tableHeadCellFilter}>
-                <TextField disabled={!column.filterable} />
-            </TableCell>
+        return ( <
+            TableCell key = {
+                index
+            }
+            className = {
+                classes.tableHeadCellFilter
+            } >
+            <
+            TextField disabled = {!column.filterable
+            }
+            /> <
+            /TableCell>
         );
     });
 };
@@ -103,21 +136,27 @@ export const buildTableHeader = (
         onSortClick(event, property);
     };
     return header.map((column, index) => {
-        const cellClass = column.sortable
-            ? classes.tableHeadCell + " " + classes.tableHeadCellSortable
-            : classes.tableHeadCell;
-        return (
-            <TableCell key={index} className={cellClass}>
-                {column.sortable
-                    ? createSortableColumn(
-                          column,
-                          orderBy,
-                          order,
-                          createSortHandler,
-                          classes
-                      )
-                    : column.name}
-            </TableCell>
+        const cellClass = column.sortable ?
+            classes.tableHeadCell + " " + classes.tableHeadCellSortable :
+            classes.tableHeadCell;
+        return ( <
+            TableCell key = {
+                index
+            }
+            className = {
+                cellClass
+            } > {
+                column.sortable ?
+                createSortableColumn(
+                    column,
+                    orderBy,
+                    order,
+                    createSortHandler,
+                    classes
+                ) :
+                    column.name
+            } <
+            /TableCell>
         );
     });
 };
