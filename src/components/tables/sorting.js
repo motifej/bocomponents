@@ -1,67 +1,46 @@
 import React from "react";
+import TableSortLabel from "@material-ui/core/TableSortLabel";
 
-const subscribeSort = Wrapped =>
-    class extends React.Component {
-        constructor(props) {
-            super(props);
-            this.state = {
-                loading: true,
-                order: "asc",
-                orderBy: "",
-                sortQuery: ""
-            };
-        }
-        handleRequestSort = (event, property) => {
-            const orderBy = property;
-            let order = "desc";
-            if (
-                this.state.orderBy === property &&
-                this.state.order === "desc"
-            ) {
-                order = "asc";
-            }
-            const sortQuery = order === "desc" ? `-${orderBy}` : `${orderBy}`;
-            this.setState({
-                orderBy,
-                order,
-                sortQuery,
-                page: 0
-            });
-        };
-        componentDidUpdate(prevProps, prevState, snapshot) {
-            if (prevState.sortQuery != this.state.sortQuery) {
-                this.getTotalPages();
-                this.request();
-            }
-        }
-
-        render() {
-            return (
-                <Wrapped
-                    {...this.props}
-                    onSortClick={this.handleRequestSort}
-                    order={this.state.order}
-                    orderBy={this.state.orderBy}
-                />
-            );
-        }
+class SubscribeSort extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    onSortClick = property => {
+        const { orderBy, order } = this.props;
+        const newSort = sortUtils.handleSort(property, orderBy, order);
+        this.props.updateSort(newSort);
     };
+    componentDidUpdate(prevProps) {
+        if (prevProps.sortQuery != this.props.sortQuery) {
+            this.props.request("SORTED_DATA");
+        }
+    }
+    render() {
+        const { col, classes, orderBy, order } = this.props;
+        return (
+            <TableSortLabel
+                active={col.value === orderBy}
+                direction={order}
+                onClick={id => this.onSortClick(col.value)}
+                className={classes.labelSpan}
+            >
+                {col.name}
+            </TableSortLabel>
+        );
+    }
+}
 
-export default subscribeSort;
+export default SubscribeSort;
 
-// updateSortState = (orderBy, order, sortQuery) => {
-//     this.setState({
-//         orderBy,
-//         order,
-//         sortQuery,
-//         page: 0
-//     });
-// };
-// handleRequestSort = (event, property, cb = this.updateSortState) => {
-//     const [orderBy, order, sortQuery] = handleSort(
-//         property,
-//         this.state.orderBy,
-//         this.state.order
-//     );
-//     cb(orderBy, order, sortQuery);
-// };
+const sortUtils = {
+    handleSort(property, stateOrderBy, stateOrder) {
+        const orderBy = property;
+        let order = "desc";
+        if (stateOrderBy === property && stateOrder === "desc") {
+            order = "asc";
+        }
+        const sortQuery = order === "desc" ? `-${orderBy}` : `${orderBy}`;
+        const result = { orderBy, order, sortQuery };
+        return result;
+    }
+};

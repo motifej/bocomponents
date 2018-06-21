@@ -38,25 +38,28 @@ const DefaultTable = props => {
         data,
         header,
         title,
-        onRowClick,
-        onSortClick,
-        order,
+        page,
         orderBy,
+        order,
+        onRowClick,
+        updatePage,
         decoder,
         request,
-        requestPagesCount
+        sortQuery,
+        updateSort
     } = props;
     const tableHeader = buildTableHeader(
         header,
-        onSortClick,
         classes,
+        request,
         order,
-        orderBy
+        orderBy,
+        sortQuery,
+        updateSort
     );
     const tableFilters = buildTableFilters(header, classes);
     const tableBody =
         data && createTableBody(data, onRowClick, classes, decoder);
-    console.log("data", data);
     if (data && header) {
         return (
             <GridContainer>
@@ -69,7 +72,9 @@ const DefaultTable = props => {
                             <div>
                                 <Pagination
                                     request={request}
-                                    requestPagesCount={requestPagesCount}
+                                    data={data}
+                                    page={page}
+                                    updatePage={updatePage}
                                 />
                                 {TableContent(
                                     classes,

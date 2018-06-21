@@ -1,6 +1,7 @@
 // const FETCH_DATA = "FETCH_DATA";
 // const FETCH_DATA_SUCCESS = "FETCH_DATA_SUCCESS";
 // const FETCH_DATA_FAIL = "FETCH_DATA_FAIL";
+
 // export const initialState = {
 //     data: [],
 //     loading: false,

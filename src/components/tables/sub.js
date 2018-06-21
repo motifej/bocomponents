@@ -1,14 +1,7 @@
 import React from "react";
-import {
-    requestPagesCount,
-    request
-} from "./request";
+import service from "./service";
 import decoder from "./decoder";
-import {
-    handleSort
-} from "./utils.js"
-
-const mainUrl = "http://almond:8081/accounts?page=1";
+import { utils } from "./utils.js";
 
 export const Subscribe = (Wrapped, config) =>
     class extends React.Component {
@@ -17,95 +10,70 @@ export const Subscribe = (Wrapped, config) =>
             this.state = {
                 data: [],
                 loading: true,
+                page: 0,
                 order: "asc",
                 orderBy: "",
                 sortQuery: "",
+                query: utils.buildQuery(config.query),
                 domain: config.domain,
                 endPoint: config.endPoint
             };
         }
-        updatePage = newPage => {
+        updateSort = ({ order, orderBy, sortQuery }) => {
+            this.setState({ sortQuery });
+        };
+        updatePage = newPage =>
             this.setState({
                 page: newPage
-            })
-        };
-        updateState = data => {
+            });
+
+        updateDataState = async response => {
+            const data = await utils.fixData(
+                response.data.result,
+                config.resultsHeader
+            );
             this.setState({
-                data,
-                loading: false
+                data
             });
         };
-        requestData = (config, url, cb = this.updateState) => {
-            request(config, url, cb);
-        };
-        requestPagesCount = (url, cb) => {
-            requestPagesCount(url, cb);
-        };
-        onRowClick = id => {
-            console.log("id", id);
-        };
-        onSortClick = (event, property) => {
-            const {
-                orderBy,
-                order
-            } = this.state
-            const {
-                orderBy,
-                order,
-                sortQuery
-            } = handleSort(property, orderBy, order)
-            console.log('something', something)
-            this.setState({
-                orderBy,
-                order,
-                sortQuery,
-            })
 
+        request = (action, cb = this.updateDataState) => {
+            const url = this.createUrl(action);
+            service.request(url, cb);
         };
+
+        createUrl = action => {
+            const { domain, endPoint, page, sortQuery, query } = this.state;
+            return utils.createUrl(
+                domain,
+                endPoint,
+                page,
+                sortQuery,
+                query,
+                action
+            );
+        };
+        onRowClick = id => console.log("id", id);
+
         componentDidMount() {
-            if (config)
-                this.requestData(config, "http://almond:8081/accounts?");
-        }
-        componentDidUpdate(prevProps, prevState, snapshot) {
-            if (prevState.sortQuery != this.state.sortQuery) {
-                // this.getTotalPages();
-                this.requestData(config, "http://almond:8081/accounts?page=3");
-            }
+            if (config) this.request();
         }
         render() {
-            return ( <
-                Wrapped { ...this.props
-                }
-                data = {
-                    this.state.data
-                }
-                header = {
-                    config && config.resultsHeader
-                }
-                title = {
-                    config && config.title
-                }
-                onSortClick = {
-                    this.onSortClick
-                }
-                order = {
-                    this.state.order
-                }
-                updatePage = {
-                    this.updatePage
-                }
-                orderBy = {
-                    this.state.orderBy
-                }
-                decoder = {
-                    decoder
-                }
-                request = {
-                    this.requestData
-                }
-                requestPagesCount = {
-                    this.requestPagesCount
-                }
+            const { data, page, order, sortQuery, orderBy } = this.state;
+            return (
+                <Wrapped
+                    {...this.props}
+                    data={data}
+                    header={config && config.resultsHeader}
+                    title={config && config.title}
+                    decoder={decoder}
+                    updatePage={this.updatePage}
+                    page={page}
+                    request={this.request}
+                    order={order}
+                    orderBy={orderBy}
+                    sortQuery={sortQuery}
+                    updateSort={this.updateSort}
                 />
             );
         }
