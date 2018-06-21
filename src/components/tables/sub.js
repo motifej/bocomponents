@@ -19,8 +19,9 @@ export const Subscribe = (Wrapped, config) =>
                 endPoint: config.endPoint
             };
         }
-        updateSort = ({ order, orderBy, sortQuery }) => {
-            this.setState({ sortQuery });
+        updateSort = response => {
+            const { order, orderBy, sortQuery } = response;
+            this.setState({ order, orderBy, sortQuery });
         };
         updatePage = newPage =>
             this.setState({
@@ -58,14 +59,19 @@ export const Subscribe = (Wrapped, config) =>
         componentDidMount() {
             if (config) this.request();
         }
+        componentDidUpdate(prevProps, prevState) {
+            if (prevState.sortQuery != this.state.sortQuery) {
+                this.request("SORTED_DATA");
+            }
+        }
         render() {
             const { data, page, order, sortQuery, orderBy } = this.state;
             return (
                 <Wrapped
                     {...this.props}
                     data={data}
-                    header={config && config.resultsHeader}
-                    title={config && config.title}
+                    header={config.resultsHeader}
+                    title={config.title}
                     decoder={decoder}
                     updatePage={this.updatePage}
                     page={page}

@@ -2,19 +2,12 @@ import React from "react";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
 
 class SubscribeSort extends React.Component {
-    constructor(props) {
-        super(props);
-    }
     onSortClick = property => {
         const { orderBy, order } = this.props;
         const newSort = sortUtils.handleSort(property, orderBy, order);
         this.props.updateSort(newSort);
     };
-    componentDidUpdate(prevProps) {
-        if (prevProps.sortQuery != this.props.sortQuery) {
-            this.props.request("SORTED_DATA");
-        }
-    }
+
     render() {
         const { col, classes, orderBy, order } = this.props;
         return (
