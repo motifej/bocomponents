@@ -20,9 +20,10 @@ export const formControlStyle = {
     rangeLabel: {
         transform:"none",
         color: "rgba(0, 0, 0, 0.54)",
-        left: "50%",
         top:"auto",
-        bottom:"0"
+        bottom:"0",
+        width:"100%",
+        textAlign:"center"
     }
 };
 
