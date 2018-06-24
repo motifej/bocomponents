@@ -1,22 +1,28 @@
 import React from "react";
 import enJson from "../../en.json";
 
-const coded = ["country_iso"];
-const time = ["timestamp", "time_stamp"];
-const isCoded = key => coded.includes(key);
-const isTime = key => time.includes(key);
-const getTime = timestamp => {
-    return `${new Date(timestamp).toDateString()} ${new Date(
-        timestamp
-    ).toLocaleTimeString()}`;
-};
-const T = token => {
-    return enJson[token];
-};
-const decoder = (key, value) => {
-    if (isCoded(key)) return T(`${key}.${value}`);
-    if (isTime(key)) return getTime(value);
-    return value;
-};
+const includes = (array, key) => array.includes(key)
 
-export default decoder;
+const decoder = {
+    coded: ["country_iso"],
+    time: ["timestamp", "time_stamp"],
+    isCode(key) {
+        return includes(decoder.coded, key)
+    },
+    isTime(key) {
+        return includes(decoder.time, key)
+    },
+    getTime(timestamp) {
+        return `${new Date(timestamp).toLocaleTimeString(timestamp)}`
+    },
+    T(token) {
+        return enJson[token]
+    },
+    run(key, value) {
+        if (decoder.isCode(key)) return decoder.T(`${key}.${value}`)
+        if (decoder.isTime(key)) return decoder.getTime(value)
+        return value
+    }
+}
+
+export default decoder

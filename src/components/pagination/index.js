@@ -1,77 +1,42 @@
-import React, { Component } from "react";
-import { withStyles } from "@material-ui/core/styles";
-import paginationStyle from "./style.jsx";
+import React from "react";
+import PaginationUI from "./view";
+import utils from "./utils";
+import constants as c from "./constants"
 
-class ReactTablePagination extends Component {
+class Pagination extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { totalPages: 0 };
+    }
+    nextPage = () => this.props.updatePage(this.props.page + 1);
+
+    previousPage = () => this.props.updatePage(this.props.page - 1);
+
+    setTotalPages = response => {
+        const totalPages = utils.extractCount(response);
+        this.setState({ totalPages });
+    };
+    getTotalPages = () => this.props.request(c.TOTAL_PAGES, this.setTotalPages);
+    componentDidMount() {
+        this.getTotalPages();
+    }
+    componentDidUpdate(prevProps) {
+        if (prevProps.page != this.props.page) this.props.request();
+    }
     render() {
-        const {
-            classes,
-            page,
-            totalPages,
-            onNextClick,
-            onPreviousClick,
-            isPreviousButtonDisabled,
-            isNextButtonDisabled
-        } = this.props;
+        const { totalPages } = this.state;
+        const { data, page } = this.props;
         return (
-            <div className={classes.pagination}>
-                <div className={classes.btnContainer}>
-                    <button
-                        onClick={onPreviousClick}
-                        disabled={isPreviousButtonDisabled}
-                        className={classes.btn}
-                    >
-                        Previous
-                    </button>
-                </div>
-                <div className={classes.center}>
-                    <span className={classes.pageInfo}>
-                        Page
-                        <div className={classes.pageJump}>
-                            <input
-                                className={classes.pageInput}
-                                type={"number"}
-                                onChange={e => {
-                                    const nextPage = e.target.value;
-                                    if (nextPage > 0)
-                                        this.setState({
-                                            page: nextPage,
-                                            canPrevious: true
-                                        });
-                                    else {
-                                        this.setState({
-                                            page: 1,
-                                            canPrevious: false
-                                        });
-                                    }
-                                }}
-                                value={page + 1}
-                                onBlur={this.applyPage}
-                                onKeyPress={e => {
-                                    if (e.which === 13 || e.keyCode === 13) {
-                                        this.applyPage();
-                                    }
-                                }}
-                            />
-                        </div>
-                        of
-                        <span className={classes.totalPages}>
-                            {totalPages || 1}
-                        </span>
-                    </span>
-                </div>
-                <div className={classes.btnContainer}>
-                    <button
-                        onClick={onNextClick}
-                        disabled={isNextButtonDisabled}
-                        className={classes.btn}
-                    >
-                        Next
-                    </button>
-                </div>
-            </div>
+            <PaginationUI
+                onNextClick={this.nextPage}
+                onPreviousClick={this.previousPage}
+                totalPages={totalPages}
+                page={page}
+                isNextButtonDisabled={!data || data.length < 50}
+                isPreviousButtonDisabled={!this.props.page}
+            />
         );
     }
 }
 
-export default withStyles(paginationStyle)(ReactTablePagination);
+export default Pagination;

@@ -1,9 +1,11 @@
-import React from "react";
-import { buildQuery, handleSort } from "./utils";
+import * as React from "react";
+import service from "./service";
 import decoder from "./decoder";
-import { requestData, fixData, requestTest } from "./fetch-data";
+import {
+    utils
+} from "./utils.js";
 
-const Subscribe = (Wrapped, config) =>
+export const Subscribe = (Wrapped, config) =>
     class extends React.Component {
         constructor(props) {
             super(props);
@@ -11,48 +13,84 @@ const Subscribe = (Wrapped, config) =>
                 data: [],
                 loading: true,
                 page: 0,
-                pagination: true,
-                query: buildQuery(config.query),
+                order: "asc",
+                orderBy: "",
+                sortQuery: "",
+                query: utils.buildQuery(config.query),
                 domain: config.domain,
                 endPoint: config.endPoint
             };
         }
-        updateState = data => {
-            this.setState({ data, loading: false });
+        updateSort = response => {
+            const {
+                order,
+                orderBy,
+                sortQuery
+            } = response;
+            this.setState({
+                order,
+                orderBy,
+                sortQuery
+            });
         };
-        createUrl = () => {
-            const { domain, endPoint, page, query, sortQuery } = this.state;
-            return this.state.sortQuery
-                ? `${domain}${endPoint}?page=${page}&${query}sort=${sortQuery}`
-                : `${domain}${endPoint}?page=${page}&${query}`;
+        updatePage = newPage =>
+            this.setState({
+                page: newPage
+            });
+
+        updateDataState = async response => {
+            const data = await utils.fixData(
+                response.data.result,
+                config.resultsHeader
+            );
+            this.setState({
+                data
+            });
         };
 
-        request = () => {
-            const { domain, endPoint, page, query } = this.state;
-            requestTest(
-                `${domain}${endPoint}?page=${page}&${query}`,
-                this.updateState,
-                config
+        request = (action, cb = this.updateDataState) => {
+            const url = this.createUrl(action);
+            service.request(url, cb);
+        };
+
+        createUrl = action => {
+            const {
+                domain,
+                endPoint,
+                page,
+                sortQuery,
+                query
+            } = this.state;
+            return utils.createUrl(
+                domain,
+                endPoint,
+                page,
+                sortQuery,
+                query,
+                action
             );
         };
+        onRowClick = id => console.log("id", id);
+
         componentDidMount() {
-            this.request();
+            if (config) this.request();
+        }
+        componentDidUpdate(prevProps, prevState) {
+            //sort request
+            if (prevState.sortQuery != this.state.sortQuery) {
+                this.request("SORTED_DATA");
+            }
         }
         render() {
-            return (
-                <Wrapped
-                    {...this.props}
-                    pagination={this.state.pagination}
-                    data={this.state.data}
-                    header={config.resultsHeader}
-                    title={config.title}
-                    request={this.request}
-                    order={this.state.order}
-                    orderBy={this.state.orderBy}
-                    decoder={decoder}
-                />
+            const {
+                data,
+                page,
+                order,
+                sortQuery,
+                orderBy
+            } = this.state;
+            return ( <Wrapped { ...this.props } data = { data } header = { config.resultsHeader } title = { config.title } decoder = { decoder.run } updatePage = { this.updatePage } page = { page } request = { this.request } order = { order } orderBy = { orderBy } sortQuery = { sortQuery } updateSort = { this.updateSort }/>
             );
         }
     };
-
 export default Subscribe;

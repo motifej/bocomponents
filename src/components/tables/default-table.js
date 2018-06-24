@@ -5,17 +5,17 @@ import TableRow from "@material-ui/core/TableRow";
 import Assignment from "@material-ui/icons/Assignment";
 import { withStyles } from "@material-ui/core/styles";
 
-import GridContainer from "../MUI-Components/Grid/GridContainer.jsx";
-import ItemGrid from "../MUI-Components/Grid/ItemGrid.jsx";
+import GridContainer from "../MUI-Components/Grid/GridContainer";
+import ItemGrid from "../MUI-Components/Grid/ItemGrid";
 import tableStyle from "./style";
-import IconCard from "../MUI-Components/Cards/IconCard.jsx";
-
-import Pagination from "./pagination";
+import IconCard from "../MUI-Components/Cards/IconCard";
+import constants from "./constants"
+import Pagination from "../pagination";
 
 import { buildTableHeader, buildTableFilters, createTableBody } from "./utils";
-const defaultTitle = "Results";
 
-const TableContent = (classes, tableHeader, tableFilters, tableBody) => {
+const TableContent = (props) => {
+    const {classes, tableHeader, tableFilters, tableBody} = props
     return (
         <div className={classes.tableContainer}>
             <Table className={classes.table}>
@@ -67,7 +67,7 @@ const DefaultTable = props => {
                     <IconCard
                         icon={Assignment}
                         iconColor="blue"
-                        title={title || defaultTitle}
+                        title={title || constants.defaultTitle}
                         content={
                             <div>
                                 <Pagination
@@ -76,12 +76,12 @@ const DefaultTable = props => {
                                     page={page}
                                     updatePage={updatePage}
                                 />
-                                {TableContent(
-                                    classes,
-                                    tableHeader,
-                                    tableFilters,
-                                    tableBody
-                                )}
+                                <TableContent
+                                    classes={classes}
+                                    tableHeader={tableHeader}
+                                    tableFilters={tableFilters}
+                                    tableBody={tableBody}
+                                />
                             </div>
                         }
                     />
