@@ -2,14 +2,12 @@ import React from "react";
 import pick from "lodash/pick";
 
 import TableCell from "@material-ui/core/TableCell";
-import TextField from "../inputs/text-field";
 import TableBody from "@material-ui/core/TableBody";
 import TableRow from "@material-ui/core/TableRow";
 import SubscribeSort from "./sorting";
 
 export const utils = {
     createUrl(domain, endPoint, page, sortQuery, query, action) {
-        console.log("sortQuery", sortQuery);
         let url = `${domain}${endPoint}?${query}`;
         if (action === "SORTED_DATA" || sortQuery.length > 0)
             return `${url}&page=${page}&sort=${sortQuery}`;
@@ -118,13 +116,3 @@ export const createTableBody = (data, onRowClick, classes, decoder) => (
         })}
     </TableBody>
 );
-
-export const buildTableFilters = (header, classes) => {
-    return header.map((column, index) => {
-        return (
-            <TableCell key={index} className={classes.tableHeadCellFilter}>
-                <TextField disabled={!column.filterable} />
-            </TableCell>
-        );
-    });
-};

@@ -12,10 +12,12 @@ import IconCard from "../MUI-Components/Cards/IconCard.jsx";
 
 import Pagination from "./pagination";
 
-import { buildTableHeader, buildTableFilters, createTableBody } from "./utils";
+import { buildTableHeader, createTableBody } from "./utils";
+import TableFiltering from "../search-service/filter-ui";
+
 const defaultTitle = "Results";
 
-const TableContent = (classes, tableHeader, tableFilters, tableBody) => {
+const TableContent = (classes, tableHeader, Filters, tableBody) => {
     return (
         <div className={classes.tableContainer}>
             <Table className={classes.table}>
@@ -24,7 +26,7 @@ const TableContent = (classes, tableHeader, tableFilters, tableBody) => {
                         {tableHeader}
                     </TableRow>
                     <TableRow className={classes.tableHeadRowFilter}>
-                        {tableFilters}
+                        {Filters}
                     </TableRow>
                 </TableHead>
                 {tableBody}
@@ -46,7 +48,8 @@ const DefaultTable = props => {
         decoder,
         request,
         sortQuery,
-        updateSort
+        updateSort,
+        updateQueryObject
     } = props;
     const tableHeader = buildTableHeader(
         header,
@@ -57,7 +60,14 @@ const DefaultTable = props => {
         sortQuery,
         updateSort
     );
-    const tableFilters = buildTableFilters(header, classes);
+    const Filters = (
+        <TableFiltering
+            header={header}
+            queryObject={props.queryObject}
+            classes={classes}
+            updateQueryObject={updateQueryObject}
+        />
+    );
     const tableBody =
         data && createTableBody(data, onRowClick, classes, decoder);
     if (data && header) {
@@ -79,7 +89,7 @@ const DefaultTable = props => {
                                 {TableContent(
                                     classes,
                                     tableHeader,
-                                    tableFilters,
+                                    Filters,
                                     tableBody
                                 )}
                             </div>
@@ -89,7 +99,7 @@ const DefaultTable = props => {
             </GridContainer>
         );
     } else {
-        return <div>hello</div>;
+        return <div>table not loaded</div>;
     }
 };
 

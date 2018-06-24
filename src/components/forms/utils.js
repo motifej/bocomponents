@@ -33,6 +33,7 @@ const createField = (input, classes, index) => {
         <Field
             className={setStyle(input.type, classes)}
             key={index}
+            name={input.name}
             component={Inputs[input.type]}
             format={value => setFormat(value, input.multiple)}
             validate={input.validate}
