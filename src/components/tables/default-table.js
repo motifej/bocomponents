@@ -75,7 +75,7 @@ const buildTableRow = (row, onRowClick, classes, decoder) => {
     return (
         <TableRow
             className={classes.tableDataRow}
-            onClick={id => onRowClick(row.cert_num)}
+            onClick={id => onRowClick(row.id)}
             key={row.id}
         >
             {Object.keys(row).map((key, index) => {
