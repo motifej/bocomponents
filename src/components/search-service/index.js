@@ -14,7 +14,6 @@ export class SearchService {
     }
 
     search(term) {
-        console.log("term", term);
         this.searchTerm.next(term.newObject, term.handler);
     }
 
