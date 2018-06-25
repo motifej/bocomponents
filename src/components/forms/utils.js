@@ -5,10 +5,11 @@ import MenuItem from "@material-ui/core/MenuItem";
 import ItemGrid from "../MUI-Components/Grid/ItemGrid.jsx";
 import Inputs from "./form-inputs";
 import {
-	setStyle,
-	setFormat,
-	wrapWithFormControl,
-	wrrapWithFormControlLabel
+    setStyle,
+    setFormat,
+    wrapWithLabel,
+    wrapWithFormControl,
+    wrapWithFormControlLabel
 } from "./helpers";
 
 const createMenuItems = (options, classes) => {
@@ -47,21 +48,23 @@ const createField = (input, classes, index) => {
 };
 
 const createInput = (input, index, classes) => {
-	const field = createField(input, classes, index);
-	return (
-		<React.Fragment key={index}>
-			<ItemGrid
-				xs={(input.grid && input.grid.field.xs) || 12}
-				sm={(input.grid && input.grid.field.sm) || 12}
-			>
-				{input.type === "select"
-					? wrapWithFormControl(field)
-					: input.type === "checkbox"
-						? wrrapWithFormControlLabel(field, input.label)
-						: field}
-			</ItemGrid>
-		</React.Fragment>
-	);
+    const field = createField(input, classes, index);
+    return (
+        <React.Fragment key={index}>
+            <ItemGrid
+                xs={(input.grid && input.grid.field.xs) || 12}
+                sm={(input.grid && input.grid.field.sm) || 12}
+            >
+                {input.type === "select"
+                    ? wrapWithFormControl(field)
+                    : input.type === "checkbox"
+                    ? wrapWithFormControlLabel(field, input.label)
+                    : input.type === "range"
+                    ? wrapWithLabel(field, input.label)
+                    : field}
+            </ItemGrid>
+        </React.Fragment>
+    );
 };
 
 export const inputsGenerator = (inputs, classes) =>
