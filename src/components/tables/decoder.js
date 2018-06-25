@@ -1,4 +1,3 @@
-import React from "react";
 import enJson from "../../en.json";
 
 const includes = (array, key) => array.includes(key);
