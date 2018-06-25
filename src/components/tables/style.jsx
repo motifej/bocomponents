@@ -28,8 +28,7 @@ const tableStyle = theme => ({
         fontSize: "14px",
         color: "rgba(0, 0, 0, 0.87)",
         tableLayout: "fixed",
-        minWidth:"1020px"
-
+        minWidth: "1020px"
     },
     tableDataRow: {
         "&:hover": {

@@ -92,11 +92,11 @@ export const Subscribe = (Wrapped, config) =>
                     page={page}
                     request={this.request}
                     order={order}
-                    queryObject={this.state.queryObject}
                     orderBy={orderBy}
                     sortQuery={sortQuery}
-                    updateQueryObject={this.updateQueryObject}
                     updateSort={this.updateSort}
+                    queryObject={this.state.queryObject}
+                    updateQueryObject={this.updateQueryObject}
                 />
             );
         }
