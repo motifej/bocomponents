@@ -1,28 +1,25 @@
 import React from "react";
-import InputRange from "react-input-range";
-import "react-input-range/lib/css/index.css";
+import Range from "rc-slider/lib/Range";
+import "rc-slider/assets/index.css";
 
-const generateLabel = (valuesArr, value) => {
-//Labels gen logic here.
-    return value;
-};
-
-const RenderInputRange = ({
-    input: { onChange, ...inputParams },
-    ...params
-}) => {
-    const rangeValues = Object.values(params.valuesMap)[0];
+const RenderInputRange = props => {
+    console.log("...params", props);
+    const {
+        input: { name, onBlur, onDragStart, onDrop, onFocus, onChange }
+    } = props;
     return (
-        <InputRange
-            draggableTrack
-            maxValue={rangeValues.length}
-            minValue={1}
-            formatLabel={value => generateLabel(rangeValues, value)}
+        <Range
             onChange={values => {
+                console.log("values", values);
                 onChange(values);
             }}
-            {...inputParams}
-            {...params}
+            name={name}
+            onDragStart={onDragStart}
+            onDrop={onDrop}
+            onFocus={onFocus}
+            onBlur={onBlur}
+            {...props.rangeProps}
+            {...props.meta}
         />
     );
 };

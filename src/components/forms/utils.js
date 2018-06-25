@@ -1,4 +1,5 @@
 import React from "react";
+import FormLabel from "@material-ui/core/FormLabel";
 import { Field } from "redux-form";
 import MenuItem from "@material-ui/core/MenuItem";
 import ItemGrid from "../MUI-Components/Grid/ItemGrid.jsx";
@@ -12,37 +13,38 @@ import {
 } from "./helpers";
 
 const createMenuItems = (options, classes) => {
-    return options.map((item, index) => {
-        return (
-            <MenuItem
-                key={index}
-                value={item.value}
-                classes={{
-                    root: classes.selectMenuItem,
-                    selected: classes.selectMenuItemSelected
-                }}
-            >
-                {item.primaryText}
-            </MenuItem>
-        );
-    });
+	return options.map((item, index) => {
+		return (
+			<MenuItem
+				key={index}
+				value={item.value}
+				classes={{
+					root: classes.selectMenuItem,
+					selected: classes.selectMenuItemSelected
+				}}
+			>
+				{item.primaryText}
+			</MenuItem>
+		);
+	});
 };
 
 const createField = (input, classes, index) => {
-    return (
-        <Field
-            className={setStyle(input.type, classes)}
-            key={index}
-            component={Inputs[input.type]}
-            format={value => setFormat(value, input.multiple)}
-            validate={input.validate}
-            {...input}
-        >
-            {input.type === "select"
-                ? createMenuItems(input.options, classes)
-                : null}
-        </Field>
-    );
+	return (
+		<Field
+			className={setStyle(input.type, classes)}
+			key={index}
+			name={input.name}
+			component={Inputs[input.type]}
+			format={value => setFormat(value, input.multiple)}
+			validate={input.validate}
+			{...input}
+		>
+			{input.type === "select"
+				? createMenuItems(input.options, classes)
+				: null}
+		</Field>
+	);
 };
 
 const createInput = (input, index, classes) => {
@@ -56,14 +58,14 @@ const createInput = (input, index, classes) => {
                 {input.type === "select"
                     ? wrapWithFormControl(field)
                     : input.type === "checkbox"
-                        ? wrapWithFormControlLabel(field, input.label)
-                        : input.type === "range"
-                            ? wrapWithLabel(field, input.label)
-                            : field}
+                    ? wrapWithFormControlLabel(field, input.label)
+                    : input.type === "range"
+                    ? wrapWithLabel(field, input.label)
+                    : field}
             </ItemGrid>
         </React.Fragment>
     );
 };
 
 export const inputsGenerator = (inputs, classes) =>
-    inputs.map((input, index) => createInput(input, index, classes));
+	inputs.map((input, index) => createInput(input, index, classes));

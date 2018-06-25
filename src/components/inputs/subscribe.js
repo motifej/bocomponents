@@ -15,5 +15,4 @@ export default (MUIComponent, mapProps) => {
             });
         }
     };
-    InputComponent.displayName = `MUIRF${MUIComponent.name}`;
 };
