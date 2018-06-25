@@ -5,7 +5,8 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import Assignment from "@material-ui/icons/Assignment";
+import Assignment from "react-icons/lib/md/assessment";
+
 
 import { withStyles } from "@material-ui/core/styles";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
@@ -74,7 +75,7 @@ const buildTableRow = (row, onRowClick, classes, decoder) => {
     return (
         <TableRow
             className={classes.tableDataRow}
-            onClick={id => onRowClick(row.id)}
+            onClick={id => onRowClick(row.cert_num)}
             key={row.id}
         >
             {Object.keys(row).map((key, index) => {
