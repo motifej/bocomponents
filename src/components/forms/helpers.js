@@ -23,7 +23,7 @@ export const wrapWithLabel = (component, label) => (
     </FormControl>
 );
 
-export const wrrapWithFormControlLabel = (component, label) => (
+export const wrapWithFormControlLabel = (component, label) => (
 	<FormControlLabel control={component} label={label} />
 );
 
