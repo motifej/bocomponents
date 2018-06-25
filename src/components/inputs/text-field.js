@@ -3,5 +3,5 @@ import Subscribe from "./subscribe";
 import { mapError } from "./utils";
 
 export default Subscribe(TextField, ({ defaultValue, ...props }) => ({
-    ...mapError(props)
+	...mapError(props)
 }));

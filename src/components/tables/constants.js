@@ -1,4 +1,4 @@
 const constants = {
 	defaultTableTitle: "Results"
-}
-export default constants 
+};
+export default constants; 
