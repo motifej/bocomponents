@@ -1,23 +1,23 @@
 export const mapError = ({
-	hasHelperText = true,
-	meta: { touched, error, warning } = {},
-	input,
-	...props
+    hasHelperText = true,
+    meta: { touched, error, warning } = {},
+    input,
+    ...props
 }) => {
-	const errorProps =
+    const errorProps =
         touched && (error || warning)
-        	? {
-        		...props,
-        		...input,
-        		error: Boolean(error || warning)
-        	}
-        	: { ...input, ...props };
+            ? {
+                  ...props,
+                  ...input,
+                  error: Boolean(error || warning)
+              }
+            : { ...input, ...props };
 
-	if (touched && hasHelperText && (error || warning)) {
-		errorProps.helperText = error || warning;
-	}
+    if (touched && hasHelperText && (error || warning)) {
+        errorProps.helperText = error || warning;
+    }
 
-	return errorProps;
+    return errorProps;
 };
 
 export const isStateLess = Component => !Component.prototype.render;

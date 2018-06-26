@@ -1,52 +1,113 @@
 const path = require("path");
-const BUILD = path.resolve(__dirname, "build");
-const SRC = path.resolve(__dirname, "src");
+const directionName = __dirname;
+const BUILD = path.resolve(directionName, "build");
+const SRC = path.resolve(directionName, "src");
 
 module.exports = {
-	entry: ["babel-polyfill", "./src/index.js"],
-	output: {
-		path: BUILD,
-		filename: "index.js",
-		libraryTarget: "commonjs2"
-	},
-	devtool: "inline-source-map",
-	module: {
-		rules: [
-			{
-				test: /\.jsx?$/,
-				loader: "babel-loader",
-				include: SRC,
-				exclude: /(node_modules|bower_components|build)/
-			},
-			{
-				test: /\.css$/,
-				use: ["style-loader", "css-loader"]
-			},
-			{
-				test: /\.json$/,
-				type: "javascript/auto",
-				use: "json-loader"
-			}
-		]
-	},
-	externals: {
-		React: "react"
-	},
-	resolve: {
-		alias: {
-			"inputs/TextField": path.resolve(
-				__dirname,
-				"src/components/inputs/text-field.js"
-			),
-			"inputs/Checkbox": path.resolve(
-				__dirname,
-				"src/components/inputs/checkbox.js"
-			),
-			"inputs/SelectField": path.resolve(
-				__dirname,
-				"src/components/inputs/select-field.js"
-			)
-		},
-		extensions: [".js", ".jsx"]
-	}
+    entry: {
+        form: "./src/components/forms/",
+        inputs: "./src/components/inputs/",
+        tables: ["babel-polyfill", "./src/components/tables/"]
+    },
+    output: {
+        path: BUILD,
+        filename: "[name].bundle.js",
+        libraryTarget: "commonjs2"
+    },
+    devtool: "inline-source-map",
+    module: {
+        rules: [
+            {
+                test: /\.jsx?$/,
+                loader: "babel-loader",
+                include: SRC,
+                exclude: /(node_modules|bower_components|build)/
+            },
+            {
+                test: /\.css$/,
+                use: ["style-loader", "css-loader"]
+            },
+            {
+                test: /\.json$/,
+                type: "javascript/auto",
+                use: "json-loader"
+            }
+        ]
+    },
+    externals: {
+        React: "react"
+    },
+    resolve: {
+        alias: {
+            "inputs/TextField": path.resolve(
+                directionName,
+                "src/components/inputs/text-field"
+            ),
+            "inputs/Checkbox": path.resolve(
+                directionName,
+                "src/components/inputs/checkbox"
+            ),
+            "inputs/SelectField": path.resolve(
+                directionName,
+                "src/components/inputs/select-field"
+            ),
+            "inputs/datePicker": path.resolve(
+                directionName,
+                "src/components/inputs/date-picker"
+            ),
+            "inputs/rangeInput": path.resolve(
+                directionName,
+                "src/components/inputs/range-input"
+            ),
+            "MUI/styles": path.resolve(
+                directionName,
+                "src/components/material-dashboard-pro-react"
+            ),
+            "MUI/Grid/GridContainer": path.resolve(
+                directionName,
+                "src/mui-components/Grid/GridContainer/"
+            ),
+            "MUI/Grid/ItemGrid": path.resolve(
+                directionName,
+                "src/mui-components/Grid/ItemGrid/"
+            ),
+            "MUI/Cards/IconCard": path.resolve(
+                directionName,
+                "src/mui-components/Cards/IconCard/"
+            ),
+            "MUI/CustomButton": path.resolve(
+                directionName,
+                "src/mui-components/CustomButton/"
+            ),
+            "MUI/Cards/HeaderCard": path.resolve(
+                directionName,
+                "src/mui-components/Cards/HeaderCards"
+            ),
+            "subscribe/table": path.resolve(
+                directionName,
+                "src/components/tables/subscribe"
+            ),
+            "subscribe/pagination": path.resolve(
+                directionName,
+                "src/components/pagination/subscribe"
+            ),
+            "subscribe/filter": path.resolve(
+                directionName,
+                "src/components/filter/subscribe"
+            ),
+            "subscribe/sort": path.resolve(
+                directionName,
+                "src/components/sort/subscribe"
+            ),
+            "tables/default": path.resolve(
+                directionName,
+                "src/components/tables/views/default-table"
+            ),
+            "forms/default": path.resolve(
+                directionName,
+                "src/components/forms/views/default-form"
+            )
+        },
+        extensions: [".js", ".jsx"]
+    }
 };

@@ -3,14 +3,12 @@ import Range from "rc-slider/lib/Range";
 import "rc-slider/assets/index.css";
 
 const RenderInputRange = props => {
-    console.log("...params", props);
     const {
         input: { name, onBlur, onDragStart, onDrop, onFocus, onChange }
     } = props;
     return (
         <Range
             onChange={values => {
-                console.log("values", values);
                 onChange(values);
             }}
             name={name}
