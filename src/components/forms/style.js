@@ -13,15 +13,15 @@ export const formControlStyle = {
     },
     rangeFormControl: {
         height: "50px",
-        margin:"10px 0 5px 0",
+        margin:"20px 0 5px 0",
         flexDirection: "column",
         justifyContent: "center"
     },
     rangeLabel: {
         transform:"none",
         color: "rgba(0, 0, 0, 0.54)",
-        top:"auto",
-        bottom:"0",
+        top:"0",
+        bottom:"auto",
         width:"100%",
         textAlign:"center"
     }

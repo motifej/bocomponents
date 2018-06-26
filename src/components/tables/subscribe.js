@@ -66,7 +66,6 @@ export const Subscribe = (Wrapped, config) =>
                 action
             );
         };
-        onRowClick = id => console.log("id", id);
 
         componentDidMount() {
             if (config) this.request();
@@ -97,6 +96,7 @@ export const Subscribe = (Wrapped, config) =>
                     updateSort={this.updateSort}
                     queryObject={this.state.queryObject}
                     updateQueryObject={this.updateQueryObject}
+                    onRowClick={config.onRowClick}
                 />
             );
         }
