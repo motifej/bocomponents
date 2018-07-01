@@ -14,7 +14,16 @@ export const setStyle = (type, styles) =>
 export const setFormat = (value, multiple) =>
 	!multiple ? value || "" : multiple && Array.isArray(value) ? value : [];
 
-export const wrrapWithFormControlLabel = (component, label) => (
+export const wrapWithLabel = (component, label) => (
+    <FormControl fullWidth style={formControlStyle.rangeFormControl}>
+        <InputLabel style={formControlStyle.rangeLabel}>
+            {label}
+        </InputLabel>
+        {component}
+    </FormControl>
+);
+
+export const wrapWithFormControlLabel = (component, label) => (
 	<FormControlLabel control={component} label={label} />
 );
 
