@@ -10,6 +10,7 @@ import { BuildDefaultTable } from "./components/tables";
 import RegularCard from "./mui-components/Cards/RegularCard";
 import ItemGrid from "./mui-components/Grid/ItemGrid";
 import GridContainer from "./mui-components/Grid/GridContainer";
+import NavPills from "./mui-components/NavPills/NavPills";
 export {
     SelectField,
     Checkbox,
@@ -18,5 +19,6 @@ export {
     BuildDefaultTable,
     RegularCard,
     ItemGrid,
-    GridContainer
+    GridContainer,
+    NavPills
 };
