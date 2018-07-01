@@ -9,7 +9,7 @@ import {
     successColor,
     warningColor,
     dangerColor
-} from "../material-dashboard-pro-react.jsx";
+} from "./material-dashboard-pro-react.jsx";
 
 const navPillsStyle = theme => ({
     root: {
