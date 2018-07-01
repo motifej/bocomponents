@@ -1,6 +1,6 @@
 {
     "name": "bocomponents",
-    "version": "2.0.0",
+    "version": "2.1.0",
     "description": "bo main components library",
     "main": "build/main.bundle.js",
     "scripts": {
