@@ -75,7 +75,7 @@ const config = {
             ),
             "MUI/Cards/HeaderCard": path.resolve(
                 directionName,
-                "src/mui-components/Cards/HeaderCards"
+                "src/mui-components/Cards/HeaderCard"
             ),
             "subscribe/table": path.resolve(
                 directionName,

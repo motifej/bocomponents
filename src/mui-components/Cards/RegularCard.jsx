@@ -8,7 +8,7 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
 
-import regularCardStyle from "../../styles/regularCardStyle";
+import regularCardStyle from "./regularCardStyle";
 
 function RegularCard({ ...props }) {
     const {

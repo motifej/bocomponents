@@ -1,6 +1,6 @@
 import React from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
-import HeaderCard from "../MUI-Components/Cards/HeaderCard";
+import HeaderCard from "MUI/Cards/HeaderCard";
 
 import defaultFormStyle from "./style.js";
 import DefaultForm from "forms/default";
