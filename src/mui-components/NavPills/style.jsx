@@ -9,7 +9,7 @@ import {
     successColor,
     warningColor,
     dangerColor
-} from "../material-dashboard-pro-react.jsx";
+} from "MUI/styles";
 
 const navPillsStyle = theme => ({
     root: {

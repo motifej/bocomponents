@@ -3,7 +3,7 @@ import {
     dangerColor,
     roseColor,
     grayColor
-} from "../material-dashboard-pro-react.jsx";
+} from "MUI/styles";
 
 const customCheckboxRadioSwitch = {
     checkboxAndRadio: {
