@@ -6,14 +6,8 @@ import Inputs from "./form-inputs";
 import {
     setStyle,
     setFormat,
-<<<<<<< HEAD
     wrapWithFormControl,
     wrrapWithFormControlLabel
-=======
-    wrapWithLabel,
-    wrapWithFormControl,
-    wrapWithFormControlLabel
->>>>>>> cd728abe04b8fe8a449ef0a46079a0bda53512e1
 } from "./helpers";
 
 const createMenuItems = (options, classes) => {
@@ -62,15 +56,8 @@ const createInput = (input, index, classes) => {
                 {input.type === "select"
                     ? wrapWithFormControl(field)
                     : input.type === "checkbox"
-<<<<<<< HEAD
                         ? wrrapWithFormControlLabel(field, input.label)
                         : field}
-=======
-                    ? wrapWithFormControlLabel(field, input.label)
-                    : input.type === "range"
-                    ? wrapWithLabel(field, input.label)
-                    : field}
->>>>>>> cd728abe04b8fe8a449ef0a46079a0bda53512e1
             </ItemGrid>
         </React.Fragment>
     );
