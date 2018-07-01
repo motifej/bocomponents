@@ -2,10 +2,10 @@
     "name": "bocomponents",
     "version": "1.1.0",
     "description": "bo main components library",
-    "main": "build/index",
+    "main": "build/main.bundle.js",
     "scripts": {
-        "start": "webpack --watch",
-        "build": "webpack",
+        "start": "webpack-dev-server --watch-poll  --config webpack.dev.js",
+        "build": "webpack --config webpack.prod.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "Esraa",
