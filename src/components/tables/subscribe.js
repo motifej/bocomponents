@@ -32,7 +32,6 @@ export const Subscribe = (Wrapped, config) =>
             this.setState({
                 page: newPage
             });
-
         updateDataState = async response => {
             const data = await utils.fixData(
                 response.data.result,
@@ -42,12 +41,10 @@ export const Subscribe = (Wrapped, config) =>
                 data
             });
         };
-
         request = (action, cb = this.updateDataState) => {
             const url = this.createUrl(action);
             service.request(url, cb);
         };
-
         createUrl = action => {
             const {
                 domain,

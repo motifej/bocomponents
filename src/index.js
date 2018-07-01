@@ -1,13 +1,22 @@
 import "babel-core/register";
 import "babel-polyfill";
 
-export { default as SelectField } from "./components/inputs/select-field";
-export { default as Checkbox } from "./components/inputs/checkbox";
-export { default as TextField } from "./components/inputs/text-field";
-export { default as RadioGroup } from "./components/inputs/radio-group";
-export { default as Switch } from "./components/inputs/switch";
+import { SelectField, Checkbox, TextField } from "./components/inputs";
 
-export { default as FormTemplate } from "./components/forms/";
+import { FormTemplate } from "./components/forms";
 
-export { BuildDefaultTable } from "./components/tables/";
-export { default as ReactTablePagination } from "./components/pagination";
+import { BuildDefaultTable } from "./components/tables";
+
+import RegularCard from "./mui-components/Cards/RegularCard";
+import ItemGrid from "./mui-components/Grid/ItemGrid";
+import GridContainer from "./mui-components/Grid/GridContainer";
+export {
+    SelectField,
+    Checkbox,
+    TextField,
+    FormTemplate,
+    BuildDefaultTable,
+    RegularCard,
+    ItemGrid,
+    GridContainer
+};
