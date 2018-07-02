@@ -34,7 +34,7 @@ export const Subscribe = (Wrapped, config) =>
             });
         updateDataState = async response => {
             const data = await utils.fixData(
-                response.data.result,
+                response.data,
                 config.resultsHeader
             );
             this.setState({

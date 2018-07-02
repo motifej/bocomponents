@@ -1,6 +1,6 @@
 const utils = {
 	extractCount(response) {
-		const count = response.data.result[0]["count(*)"];
+		const count = response.data[0].count;
 		return Math.ceil(count / 50);
 	},
 };
