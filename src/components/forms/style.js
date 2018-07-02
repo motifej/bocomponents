@@ -1,6 +1,5 @@
-import customCheckboxRadioSwitch from "../styles/customCheckboxRadioSwitch.jsx";
-import customSelectStyle from "../styles/customSelectStyle.jsx";
-import { primaryColor } from "../material-dashboard-pro-react.jsx";
+import customCheckboxRadioSwitch from "../../mui-components/customCheckboxRadioSwitch.jsx";
+import customSelectStyle from "../../mui-components/customSelectStyle.jsx";
 
 export const formControlStyle = {
     selectFormControl: {

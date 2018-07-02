@@ -55,7 +55,7 @@ const config = {
             ),
             "MUI/styles": path.resolve(
                 directionName,
-                "src/components/material-dashboard-pro-react"
+                "src/mui-components/material-dashboard-pro-react"
             ),
             "MUI/Grid/GridContainer": path.resolve(
                 directionName,

@@ -9,7 +9,7 @@ import {
     successColor,
     warningColor,
     dangerColor
-} from "../material-dashboard-pro-react.jsx";
+} from "MUI/styles";
 
 const navPillsStyle = theme => ({
     root: {
@@ -131,7 +131,7 @@ const navPillsStyle = theme => ({
         alignItems: "center",
         justifyContent: "center"
     },
-    selected:{
+    selected: {
         backgroundColor: "red"
     }
 });

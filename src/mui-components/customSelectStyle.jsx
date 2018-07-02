@@ -1,7 +1,7 @@
 import {
     primaryColor,
     primaryBoxShadow
-} from "../material-dashboard-pro-react.jsx";
+} from "MUI/styles";
 
 const customSelectStyle = {
     select: {
