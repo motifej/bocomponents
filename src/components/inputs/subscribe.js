@@ -2,7 +2,7 @@ import { Component, createElement } from "react";
 import { isStateLess } from "./utils";
 
 export default (MUIComponent, mapProps) => {
-    return class InputComponent extends Component {
+    return class subscribe extends Component {
         getRenderedComponent() {
             return this.refs.component;
         }

@@ -3,6 +3,7 @@ import Checkbox from "inputs/Checkbox";
 import SelectField from "inputs/SelectField";
 import RenderDateTimePicker from "inputs/datePicker";
 import RenderInputRange from "inputs/rangeInput";
+import RenderSliderWithInputs from "inputs/sliderWithInputs";
 
 export default {
     text: TextField,
@@ -11,5 +12,6 @@ export default {
     checkbox: Checkbox,
     select: SelectField,
     date: RenderDateTimePicker,
-    range: RenderInputRange
+    range: RenderInputRange,
+    sliderWithInputs: RenderSliderWithInputs
 };
