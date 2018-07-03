@@ -1,4 +1,5 @@
 const path = require("path");
+
 const directionName = __dirname;
 const BUILD = path.resolve(directionName, "build");
 const SRC = path.resolve(directionName, "src");
@@ -48,6 +49,10 @@ const config = {
             "inputs/datePicker": path.resolve(
                 directionName,
                 "src/components/inputs/date-picker"
+            ),
+            "inputs/sliderWithInputs": path.resolve(
+                directionName,
+                "src/components/inputs/slider-with-inputs"
             ),
             "inputs/rangeInput": path.resolve(
                 directionName,

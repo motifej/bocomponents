@@ -6,5 +6,8 @@ module.exports = merge(common.config, {
     externals: {
         react: "umd react",
         "react-dom": "umd react-dom"
+    },
+    output: {
+        libraryTarget: "amd"
     }
 });
