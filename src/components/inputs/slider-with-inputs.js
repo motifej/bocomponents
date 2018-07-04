@@ -3,13 +3,13 @@ import Range from "rc-slider/lib/Range";
 import TextField from "./text-field";
 import "rc-slider/assets/index.css";
 
-const handleInputChange = (e, props) => {
+const handleInputChange = (e, max) => {
     const value = e.target.value;
     if (value === "") {
         return " ";
     }
-    if (props.rangeProps.max < value) {
-        return parseInt(props.rangeProps.max);
+    if (value > max) {
+        return parseInt(max);
     }
 
     return parseInt(value);
@@ -17,47 +17,41 @@ const handleInputChange = (e, props) => {
 
 const SliderWithInputs = props => {
     const {
-        input: { name, onBlur, onDragStart, onDrop, onFocus, onChange, value }
+        input: { value, onChange, ...inputProps }
     } = props;
+    const [currMin, currMax] = value && value;
+    const { min, max, defaultValue } = props.rangeProps;
     return (
-        <div style={{ width: "40%" }}>
+        <div>
             <TextField
-                value={value ? parseInt(value[0]) : props.rangeProps.min}
+                value={value ? parseInt(currMin) : min}
                 type="number"
-                min={props.rangeProps.min}
+                min={min}
                 onChange={e => {
                     const newValues = [
-                        handleInputChange(e, props),
-                        value[1] || props.rangeProps.max
+                        handleInputChange(e, max),
+                        currMax || max
                     ];
                     onChange(newValues);
                 }}
-                required={true}
             />
             <Range
-                name={name}
-                onDragStart={onDragStart}
-                onDrop={onDrop}
-                onFocus={onFocus}
-                onBlur={onBlur}
-                {...props.rangeProps}
-                {...props.meta}
-                value={
-                    value ? value : [props.rangeProps.min, props.rangeProps.max]
-                }
-                defaultValue={props.rangeProps.defaultValue}
-                step={1}
+                value={value ? value : [min, max]}
+                defaultValue={defaultValue}
                 onChange={values => {
                     onChange(values);
                 }}
+                {...inputProps}
+                {...props.rangeProps}
+                {...props.meta}
             />
             <TextField
-                value={value ? parseInt(value[1]) : props.rangeProps.max}
+                value={value ? parseInt(currMax) : max}
                 type="number"
-                max={props.rangeProps.max}
+                max={max}
                 onChange={e => {
                     const newValues = [
-                        value[0] || props.rangeProps.min,
+                        currMin || min,
                         handleInputChange(e, props)
                     ];
                     onChange(newValues);
