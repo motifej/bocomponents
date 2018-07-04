@@ -2,60 +2,31 @@
 
 ##Info
 This project should be used by all Back Office applications for most of their components
- * Install: npm install bocomponents
- * Package location : https://www.npmjs.com/package/bocomponents
+
+-   Install: npm install bocomponents
+-   Package location : https://www.npmjs.com/package/bocomponents
 
 ## Basic components :
-
-#### Buttons:  
-usage:
-```javascript
-  import { RaisedPrimaryButton } from "bocomponents/src/components/Buttons"
-```
-Examples: https://material-ui.com/demos/buttons/  
-  * Raised Default Button `<RaisedDefaultButton />`
-  * Raised Primary Button `<RaisedPrimaryButton/>`
-  * Raised Secondary Button `<RaisedSecondaryButton/>`
-  * Raised Disabled Button `<RaisedDsiabledButton/>`
-  * Flat Default Button `<FlatDefaultButton/>`
-  * Flat Primary `<FlatPrimaryButton/>`
-  * Flat Secondary Button `<FlatSecondaryButton/>`
-  * Flat Disabled Button `<FlatDisabledButton/>`
-
-#### Inputs:
-  Usage: 
-  ```javascript
-    import { TextField } from "bocomponents/inputs/"
-  ```
-  Docs:
-  * TextField
-    https://material-ui.com/api/text-field/
-  * SelectField
-    https://material-ui.com/api/select/
-  * Checkbox
-    https://material-ui.com/api/checkbox/
-  * date-picker
-    https://www.npmjs.com/package/react-datepicker
-  * range
-    https://www.npmjs.com/package/rc-slider
-    
 
 ## Advanced components
 
 #### Form:
- * Available inputs in Form: 
-    * text
-    * number
-    * email
-    * checkbox
-    * select
-    * radio-group
-    * checkbox
-    * range
- * Form usage example:  
- ```javascript
+
+-   Available inputs in Form:
+    -   text
+    -   number
+    -   email
+    -   checkbox
+    -   select
+    -   radio-group
+    -   checkbox
+    -   range
+-   Form usage example:
+
+
+```javascript
 import { FormTemplate } from "bocomponents";
- 
+
 const Form = props => {
     const { classes, reset, history } = props;
 
@@ -82,7 +53,8 @@ export default withRouter(
 );
 ```
 
-* Config usage example:
+-   Config usage example:
+
 ```javascript
 const config = {
     name: "searchUsers",
@@ -110,38 +82,41 @@ const config = {
                 max: 1000000,
                 step: 50
             }
-            
+
         }...
-        
+
 ```
-* Validation:
+
+-   Validation:
 
 Usage:
+
 ```javascript
-import { TextField } from "bocomponents/inputs/"
+import { TextField } from "bocomponents/inputs/";
 ```
 
 Available validation methods(self explanatory):
-* required
-* minLength
-* maxLength
-* minValue 
-* maxValue 
-* email
-number
 
+-   required
+-   minLength
+-   maxLength
+-   minValue
+-   maxValue
+-   email
+    number
 
 #### Table
 
-Table usage example: 
- ```javascript
+Table usage example:
+
+```javascript
 const Table = BuildDefaultTable(config);
 
 const Results = props => {
     const { classes, history, searchForm } = props;
 
     const onRowClick = id => {
-        history.push("/info/"+id);
+        history.push("/info/" + id);
     };
 
     config.query = (searchForm && searchForm.values) || "";
@@ -164,6 +139,7 @@ export default withRouter(
 ```
 
 Config usage example
+
 ```javascript
 const config = {
     domain: "http://localhost:8083",
@@ -179,13 +155,46 @@ const config = {
         }...
 ```
 
-
 #### MUI components (from dashboard)
 
 Usage:
+
 ```javascript
 import { GridContainer, ItemGrid, RegularCard, NavPills } from "bocomponents";
 ```
+
 Docs:
 https://material-ui.com/
 
+<!-- #### Buttons:  
+usage:
+```javascript
+  import { RaisedPrimaryButton } from "bocomponents/src/components/Buttons"
+```
+Examples: https://material-ui.com/demos/buttons/  
+  * Raised Default Button `<RaisedDefaultButton />`
+  * Raised Primary Button `<RaisedPrimaryButton/>`
+  * Raised Secondary Button `<RaisedSecondaryButton/>`
+  * Raised Disabled Button `<RaisedDsiabledButton/>`
+  * Flat Default Button `<FlatDefaultButton/>`
+  * Flat Primary `<FlatPrimaryButton/>`
+  * Flat Secondary Button `<FlatSecondaryButton/>`
+  * Flat Disabled Button `<FlatDisabledButton/>`
+
+#### Inputs:
+  Usage:
+  ```javascript
+    import { TextField } from "bocomponents/inputs/"
+  ```
+  Docs:
+  * TextField
+    https://material-ui.com/api/text-field/
+  * SelectField
+    https://material-ui.com/api/select/
+  * Checkbox
+    https://material-ui.com/api/checkbox/
+  * date-picker
+    https://www.npmjs.com/package/react-datepicker
+  * range
+    https://www.npmjs.com/package/rc-slider
+     -->
