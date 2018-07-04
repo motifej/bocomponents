@@ -1,3 +1,5 @@
+// need refactoring
+
 import React from "react";
 import Range from "rc-slider/lib/Range";
 import TextField from "./text-field";
