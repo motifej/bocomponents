@@ -23,7 +23,6 @@ This project should be used by all Back Office applications for most of their co
     -   range
 -   Form usage example:
 
-
 ```javascript
 import { FormTemplate } from "bocomponents";
 
@@ -84,7 +83,6 @@ const config = {
             }
 
         }...
-
 ```
 
 -   Validation:
@@ -165,36 +163,3 @@ import { GridContainer, ItemGrid, RegularCard, NavPills } from "bocomponents";
 
 Docs:
 https://material-ui.com/
-
-<!-- #### Buttons:  
-usage:
-```javascript
-  import { RaisedPrimaryButton } from "bocomponents/src/components/Buttons"
-```
-Examples: https://material-ui.com/demos/buttons/  
-  * Raised Default Button `<RaisedDefaultButton />`
-  * Raised Primary Button `<RaisedPrimaryButton/>`
-  * Raised Secondary Button `<RaisedSecondaryButton/>`
-  * Raised Disabled Button `<RaisedDsiabledButton/>`
-  * Flat Default Button `<FlatDefaultButton/>`
-  * Flat Primary `<FlatPrimaryButton/>`
-  * Flat Secondary Button `<FlatSecondaryButton/>`
-  * Flat Disabled Button `<FlatDisabledButton/>`
-
-#### Inputs:
-  Usage:
-  ```javascript
-    import { TextField } from "bocomponents/inputs/"
-  ```
-  Docs:
-  * TextField
-    https://material-ui.com/api/text-field/
-  * SelectField
-    https://material-ui.com/api/select/
-  * Checkbox
-    https://material-ui.com/api/checkbox/
-  * date-picker
-    https://www.npmjs.com/package/react-datepicker
-  * range
-    https://www.npmjs.com/package/rc-slider
-     -->
